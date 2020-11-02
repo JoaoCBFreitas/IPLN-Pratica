@@ -53,8 +53,8 @@ def procTexto(t):
 
 def gTree(num):
     nome = bg[num]["name"]
-    print(nome)
     for i in bg[num]["fams"]:
+        print("CENAS", i)
         for f in bf[i]["child"]:
             filho = bg[f]["name"]
             print(filho)
@@ -66,8 +66,8 @@ for name in args:
     with open(name) as f:
         txt = f.read()
         procTexto(txt)
-print("Individuos\n", bg)
-print("Familia\n", bf)
+#print("Individuos\n", bg)
+#print("Familia\n", bf)
 # pickle.dump()
 if "-a" in ops:
     gTree(ops["-a"])
