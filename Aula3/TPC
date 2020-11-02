@@ -14,8 +14,8 @@ import math
 from getopt import getopt
 import sys
 # getopt com short options
-ops,args=getopt(sys.argv[1:],"aofl:")
-ops=dict(ops)
+ops, args = getopt(sys.argv[1:], "aofl:")
+ops = dict(ops)
 #print (ops,args)
 
 dicionario = {}
@@ -25,39 +25,39 @@ for name in args:
     mod = re.sub(r'\n\n+', '\n', txt)
     listaPalavras = re.split(r'\W+', mod)
     for x in listaPalavras:
-        #se a length<1 ignora
+        # se a length<1 ignora
         if not x:
             continue
         if x in dicionario:
             dicionario[x] += 1
         else:
             dicionario[x] = 1
-numeroPalavras=0
+numeroPalavras = 0
 for key, value in dicionario.items():
-    numeroPalavras=numeroPalavras+value     
+    numeroPalavras = numeroPalavras+value
 
-#Ordem alfabetica
+# Ordem alfabetica
 if '-a' in ops:
     for key, value in sorted(dicionario.items(), key=lambda x: x[0].lower()):
         print(key, '------->', value)
 else:
     if '-f' in ops:
-        relativo={}
-        #Frequencia relativa
+        relativo = {}
+        # Frequencia relativa
         for key, value in sorted(dicionario.items(), key=lambda x: x[1]):
-            relativo[key]=(value/numeroPalavras)*1000000
+            relativo[key] = (value/numeroPalavras)*1000000
         print(relativo)
-            
+
     else:
-        #Frequencia relativa logaritmica
+        # Frequencia relativa logaritmica
         if '-l' in ops:
-            logaritmico={}
+            logaritmico = {}
             for key, value in sorted(dicionario.items(), key=lambda x: x[1]):
-                logaritmico[key]=math.log(((value/numeroPalavras)*1000000))
+                logaritmico[key] = math.log(value/numeroPalavras)*1000000
             print(logaritmico)
         else:
-        #Numero de ocorrencias
+            # Numero de ocorrencias
             for key, value in sorted(dicionario.items(), key=lambda x: x[1]):
                 print(value, '------->', key)
 
-#criar um objecto atraves do pickle com as frequencias
+# criar um objecto atraves do pickle com as frequencias
