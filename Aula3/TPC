@@ -14,7 +14,7 @@ import math
 from getopt import getopt
 import sys
 # getopt com short options
-ops, args = getopt(sys.argv[1:], "aofl:")
+ops, args = getopt(sys.argv[1:], "a:fl")
 ops = dict(ops)
 #print (ops,args)
 
@@ -47,13 +47,12 @@ else:
         for key, value in sorted(dicionario.items(), key=lambda x: x[1]):
             relativo[key] = (value/numeroPalavras)*1000000
         print(relativo)
-
     else:
-        # Frequencia relativa logaritmica
         if '-l' in ops:
             logaritmico = {}
+            # Frequencia relativa logaritmica
             for key, value in sorted(dicionario.items(), key=lambda x: x[1]):
-                logaritmico[key] = math.log(value/numeroPalavras)*1000000
+                logaritmico[key] = math.log((value/numeroPalavras)*1000000)
             print(logaritmico)
         else:
             # Numero de ocorrencias
