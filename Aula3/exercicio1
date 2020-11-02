@@ -1,0 +1,90 @@
+#!/usr/bin/python3
+"""
+"""
+import re
+import math
+from getopt import getopt
+import sys
+import pickle
+import spacy
+
+nlp=spacy.load("pt_core_news_sm")
+#Dicionario do individuo
+bg={}
+#Dicionario da familia
+bf={}
+def procInd(s,l):
+    pessoa={}
+    nome=re.search(r"\bNAME\s+(.*)",l)
+    if nome:
+        pessoa["name"]=nome[1]
+    nome=re.findall(r"\bFAMS\s+@(.*)@",l)
+    pessoa["fams"]=nome
+    bg[s]=pessoa
+
+
+# 0 @F1234@ FAM
+# 1 HUSB @I123@
+# 1 WIFE @I321@
+# ! CHIL @I222@
+def procFam(s,l):
+    fam={}
+    marido=re.search(r"\bHUSB\s+@(.*)@",l)
+    if marido:
+        fam["husb"]=marido[1]
+    wife=re.search(r"\bWIFE\s+@(.*)@",l)
+    if wife:
+        fam["wife"]=wife[1]
+    chil=re.findall(r"\bCHIL\s+@(.*)@",l)
+    fam["child"]=chil
+    bf[s]=fam
+
+def procTexto(t):
+    items=re.split(r"\n0.*0",t)
+    for i in items:
+        z=re.search(r"@(I\d+)@.*INDI",i)
+        if z:
+            procInd(z[1],i)
+        f=re.search(r"@(F\d+)@.*FAM",i)
+        if f:
+            procFam(f[1],i)
+def gTree(num):
+    nome=bg[num]["name"]
+    print(nome)
+    for i in bg[num]["fams"]:
+        for f in bf[i]["child"]:
+            filho=bg[f]["name"]
+            print(filho)
+    
+
+ops,args=getopt(sys.argv[1:],"a:")
+ops=dict(ops)
+for name in args:
+    with open(name) as f:
+        txt = f.read()
+        procTexto(txt)
+print("Individuos\n",bg)
+print("Familia\n",bf)
+#pickle.dump()
+if "-a" in ops:
+    gTree(ops["-a"])
+
+
+
+
+# TRABALHOS
+#1- Dado um texto ver quem interage com quem e quantas vezes o faz.
+#2- Calcular a diferenca de logaritmos calculados com a media geral (tem uns ficheiros com essa media geral).
+#3- Guardar a tabela dos logaritmos de referencia
+#4- Criar funcoes simples para ir buscar os pais/filhos/nome de um individuo e fazer diagramas com isso 
+
+# sacar python -m spacy download pt_core_news_sm (ou lg ou md)
+
+
+#import spacy
+#nlp=spacy.load("pt_core_news_sm")
+#doc=nlp("Hoje fui a aula de IPLN")
+#for token in doc: 
+#   print(token.pos_)
+#   print(token.pos_,token.lemma_,token.ent_type_,token.tag_)
+#output para cada palavra diz o tipo (adverbio, verbo,nome, determinante)

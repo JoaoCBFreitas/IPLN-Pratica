@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+"""
+Listas de compreensao
+Transpor matrizes
+...
+"""
+import re
+from getopt import getopt
+import sys
+
+#quadrados pares de 0 a 5
+x=[i**2 for i in range(5) if i%2==0]\
+#transpor matriz
+m=[[1,2,3,4],
+  [1,2,3,4]]
+t=[[m[b][a] for b in range(len(m))] for a in range(len(m[0]))]
+#coisa dos elefantes numa so linha
+elefantes=[f'Se {e} elefantes ... {e+1} ... muito mais' for e in range(1,101)]
+print("\n".join(elefantes))

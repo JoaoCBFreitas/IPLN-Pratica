@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+"""
+Filtro para leitura de varios ficheiros passados em linhas de comando
+...
+"""
+import re
+from getopt import getopt
+import sys
+
+ops,args=getopt(sys.argv[1:],"aof:")
+ops=dict(ops)
+for name in args:
+    with open(name) as f:
+        txt = f.read()
+    #processar o ficheiro
+
+#definir opcoes
+if '-a' in ops:
+    print("a")

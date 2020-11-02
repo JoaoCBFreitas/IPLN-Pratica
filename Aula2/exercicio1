@@ -1,0 +1,54 @@
+#!/usr/bin/python3
+"""
+exercicio1 - calcula o numero de ocorrencias de palavras
+    argumentos: [ops] ficheiros
+        ops: -a -Ordem alfabetica
+             -f -Frequencia Relativa
+             -l -Frequencia logaritmica
+             Sem opcoes -numero de ocorrencias
+
+...
+"""
+import re
+import math
+from getopt import getopt
+import sys
+# getopt com short options
+ops,args=getopt(sys.argv[1:],"aofl:")
+ops=dict(ops)
+#print (ops,args)
+
+dicionario = {}
+for name in args:
+    with open(name) as f:
+        txt = f.read()
+    mod = re.sub(r'\n\n+', '\n', txt)
+    listaPalavras = re.split(r'\W+', mod)
+    for x in listaPalavras:
+        #se a length<1 ignora
+        if not x:
+            continue
+        if x in dicionario:
+            dicionario[x] += 1
+        else:
+            dicionario[x] = 1
+numeroPalavras=0
+for key, value in dicionario.items():
+    numeroPalavras=numeroPalavras+value     
+
+
+if '-a' in ops:
+    for key, value in sorted(dicionario.items(), key=lambda x: x[0].lower()):
+        print(key, '------->', value)
+else:
+    if '-f' in ops:
+        for key, value in sorted(dicionario.items(), key=lambda x: x[1]):
+            print(key, '------->', (value/numeroPalavras)*1000000)
+    else:
+        if '-l' in ops:
+            for key, value in sorted(dicionario.items(), key=lambda x: x[1]):
+                print(key, '------->', math.log((value/numeroPalavras)*1000000))
+        else:
+            for key, value in sorted(dicionario.items(), key=lambda x: x[1]):
+                print(value, '------->', key)
+

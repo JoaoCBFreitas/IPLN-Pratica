@@ -1,0 +1,38 @@
+#!/usr/bin/python3
+"""
+Substitui contracoes
+...
+"""
+import re
+from getopt import getopt
+import sys
+# getopt com short options
+ops,args=getopt(sys.argv[1:],"aofl:")
+ops=dict(ops)
+
+excecoes={"can’t":"can not","won’t":"will not","WON’T":"WILL NOT","DON’T":"DO NOT"}
+for name in args:
+    with open(name) as f:
+        txt = f.read()
+    for word,replace in excecoes.items():
+        txt=re.sub(rf'\b{word}\b',rf'{replace}',txt)
+    txt=re.sub(r'n’t',' not ',txt)
+    txt=re.sub(r'c’mere',' come here ',txt)
+    txt=re.sub(r'C’mere','Come here ',txt)
+    txt=re.sub(r'’ll',' will ',txt)
+    txt=re.sub(r'’ve',' have ',txt)
+    txt=re.sub(r'’re',' are ',txt)
+    txt=re.sub(r'’m',' am ',txt)
+    txt=re.sub(r'D’','Do ',txt)
+    txt=re.sub(r'd’',' do ',txt)
+    txt=re.sub(r's’p','sup',txt)
+    txt=re.sub(r'’n',' than ',txt)
+    txt=re.sub(r'’ry','ery ',txt)
+    txt=re.sub(r'That’s','That is',txt)
+    txt=re.sub(r'that’s','that is',txt)
+
+    contracoes=(re.findall(r"(.{,10}(\b\w+[’]\w+\b).{,10})",txt))
+
+    for p,w in contracoes:
+        print(p,'-->',w)
+#Calcular capitalizacao preferencial de cada palavra
