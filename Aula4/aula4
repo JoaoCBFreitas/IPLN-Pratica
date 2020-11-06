@@ -1,0 +1,18 @@
+#!/usr/bin/python3
+"""
+texto
+    -sentence splitting
+    -tokenizacao
+    -tagging
+    -named entity recognition (reconhece elementos numa frase, nomes de pessoas/locais/etc)
+    -named entity classification (classifica nomes como local, pessoa,instituicao,etc)
+    -parsing
+        -shallow
+        -dependency grammars 
+        -...
+    
+"""
+import sys
+from getopt import getopt
+import re
+
