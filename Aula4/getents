@@ -17,9 +17,14 @@ from getopt import getopt
 import re
 import spacy
 
-txt=open(sys.args[1]).read()
-n=spacy.load("pt_core_news_sm")
-a=n(txt)
+txt=open(sys.argv[1]).read()
+nlp=spacy.load("pt_core_news_sm")
+a=nlp(txt)
 #-------------------------------------------
-
+for s in a.sents:
+    if len(s.ents)>1:
+        print ("========",s.ents)
+        print (s)
 #-------------------------------------------
+#estudar math.lib
+#calcular polaridade de um livro por capitulo
