@@ -15,24 +15,11 @@ texto
 import sys
 from getopt import getopt
 import re
-
 import spacy
+
+txt=open(sys.args[1]).read()
 n=spacy.load("pt_core_news_sm")
-doc="""Na era quaternária eu ainda não era nascido.
-Na Jurássico, Portugal ainda não era nascido.
-E o Presidente da República também não."""
-a=n(doc)
+a=n(txt)
 #-------------------------------------------
-#lista de entidadades
-#print(a.ents)
-#-------------------------------------------
-#lista das frases
-#print(list(a.sents))
-#-------------------------------------------
-#entidades da primeira frase
-#print(list(a.sents)[1].ents)
-#-------------------------------------------
-#tokens e suas tags
-for t in a:
-    print((t,t.lemma_,t.tag_),"\n")
+
 #-------------------------------------------
