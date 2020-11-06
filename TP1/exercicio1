@@ -1,0 +1,91 @@
+#!/usr/bin/python3
+"""
+"""
+import sys
+from getopt import getopt
+import re
+
+BG = {}
+
+def gTree(n):
+    nome = BG[n]['name']
+    print(nome)
+    for i in BG[n]['fams']:
+        for f in BF[i]['child']:
+            filho = BG[f]['name'] 
+            print("\t", filho)
+
+def procIndi(s,i):
+    indi = {}
+    v = re.search(r'\bNAME\s+(.*)', i)
+    if v:
+        indi['name']= v[1]
+    v = re.findall (r'\bFAMS\s+@(.*)@',i)
+    indi['fams']= v
+    BG[s] = indi 
+
+#exemplo de uma familia
+# 0 @F344@ FAM
+# 1 HUSB @I2426@
+# 1 WIFE @I2920@
+# 1 CHIL @I1422@
+
+BF = {}
+def procFam(f,i):
+    fam={}
+    h = re.search(r'\bHUSB\s+@(.*)@',i)
+    if h:
+       fam['husb'] = h[1]
+    w = re.search(r'\bWIFE\s+@(.*)@',i)
+    if w:
+        fam['wife'] = w[1]
+    fam['child'] = re.findall (r'\bCHIL\s+@(.*)@',i)
+    BF[f] = fam
+
+def procTexto(t):
+    items = re.split(r'\n0',t) 
+    for i in items: 
+        z = re.search(r'@(I\d+)@ *INDI', i)
+        if z: 
+            procIndi(z[1],i)
+        f = re.search(r'@(F\d+)@ *FAM', i)
+        if f:
+            procFam(f[1],i)
+        
+
+
+ops,args = getopt(sys.argv[1:],"a:o:")
+ops = dict(ops)
+for ficheiro in args:
+    with open(ficheiro) as f :
+        txt = f.read()
+    #processar o texto
+    procTexto(txt)
+
+print("\nINDIVIDUOS\n", BG)
+print("\nFAMILIAS\n", BF)
+
+
+#diferentes opçoes
+if '-a' in ops:
+    gTree(ops["-a"])
+
+# Exemplo de execucao
+# ./exercicio1 -a I21 fichInput (royal_gedcom)
+
+# TRABALHOS
+#1- Dado um texto ver quem interage com quem e quantas vezes o faz.
+#2- Calcular a diferenca de logaritmos calculados com a media geral (tem uns ficheiros com essa media geral).
+#3- Guardar a tabela dos logaritmos de referencia
+#4- Criar funcoes simples para ir buscar os pais/filhos/nome de um individuo e fazer diagramas com isso 
+
+# sacar python -m spacy download pt_core_news_sm (ou lg ou md)
+
+
+#import spacy
+#nlp=spacy.load("pt_core_news_sm")
+#doc=nlp("Hoje fui a aula de IPLN")
+#for token in doc: 
+#   print(token.pos_)
+#   print(token.pos_,token.lemma_,token.ent_type_,token.tag_)
+#output para cada palavra diz o tipo (adverbio, verbo,nome, determinante)
