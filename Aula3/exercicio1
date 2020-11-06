@@ -70,11 +70,8 @@ print("\nFAMILIAS\n", BF)
 if '-a' in ops:
     gTree(ops["-a"])
 
-
-
-
-
-
+# Exemplo de execucao
+# ./exercicio1 -a I21 fichInput (royal_gedcom)
 
 # TRABALHOS
 #1- Dado um texto ver quem interage com quem e quantas vezes o faz.
