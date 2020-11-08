@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
 """
+import os
 import sys
 from getopt import getopt
 import re
@@ -8,14 +9,19 @@ import jinja2
 
 BG = {}
 
+root = os.path.dirname(os.path.abspath(__file__))
+templates_dir = os.path.join(root, 'templates')
+env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir))
+template = env.get_template('default.html')
+
 
 def gTree(n):
     nome = BG[n]['name']
-    print(nome)
+    filho = []
     for i in BG[n]['fams']:
         for f in BF[i]['child']:
-            filho = BG[f]['name']
-            print("\t", filho)
+            filho.append(BG[f]['name'])
+    return (nome, filho)
 
 
 def procIndi(s, i):
@@ -61,5 +67,13 @@ for ficheiro in args:
         txt = f.read()
     procTexto(txt)
 
+
 for key, value in BG.items():
-    gTree(key)
+    filename = os.path.join(root, 'paginas', str(key) + ".html")
+
+    f = gTree(key)
+    with open(filename, 'w') as fh:
+        fh.write(template.render(
+            h1=f[0],
+            names=f[1],
+        ))
