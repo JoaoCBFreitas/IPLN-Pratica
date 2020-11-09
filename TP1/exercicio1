@@ -68,9 +68,10 @@ for ficheiro in args:
         txt = f.read()
     procTexto(txt)
 
-
+indice = []
 for key, value in BG.items():
     filename = os.path.join(root, 'paginas', str(key) + ".html")
+    indice.append([(BG[key]['name'], key)])
     f = gTree(key)
     nomes = f[1]
     if nomes == []:
@@ -88,9 +89,6 @@ with open(filename, 'w') as fh:
         names=[("Voltar ao inicio", "index")]
     ))
 # Indice
-indice = []
-for key, value in BG.items():
-    indice.append([(BG[key]['name'], key)])
 filename = os.path.join(root, 'paginas', "Index.html")
 with open(filename, 'w') as fh:
     fh.write(template2.render(
