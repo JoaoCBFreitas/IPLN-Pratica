@@ -13,6 +13,7 @@ root = os.path.dirname(os.path.abspath(__file__))
 templates_dir = os.path.join(root, 'templates')
 env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_dir))
 template = env.get_template('default.html')
+template2 = env.get_template('indice.html')
 
 
 def gTree(n):
@@ -20,7 +21,7 @@ def gTree(n):
     filho = []
     for i in BG[n]['fams']:
         for f in BF[i]['child']:
-            filho.append(BG[f]['name'])
+            filho.append((BG[f]['name'], f))
     return (nome, filho)
 
 
@@ -70,10 +71,29 @@ for ficheiro in args:
 
 for key, value in BG.items():
     filename = os.path.join(root, 'paginas', str(key) + ".html")
-
     f = gTree(key)
+    nomes = f[1]
+    if nomes == []:
+        nomes = [("Unknown", "I0")]
     with open(filename, 'w') as fh:
         fh.write(template.render(
             h1=f[0],
-            names=f[1],
+            names=nomes
         ))
+# Para o caso de nao ter filhos pode voltar ao inicio
+filename = os.path.join(root, 'paginas', "I0.html")
+with open(filename, 'w') as fh:
+    fh.write(template.render(
+        h1="Indivíduo Desconhecido",
+        names=[("Voltar ao inicio", "index")]
+    ))
+# Indice
+indice = []
+for key, value in BG.items():
+    indice.append([(BG[key]['name'], key)])
+filename = os.path.join(root, 'paginas', "Index.html")
+with open(filename, 'w') as fh:
+    fh.write(template2.render(
+        h1="Indice",
+        names=indice
+    ))
