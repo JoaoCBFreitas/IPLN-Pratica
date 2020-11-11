@@ -21,8 +21,8 @@ def gTree(n):
     filho = []
     for i in BG[n]['fams']:
         for f in BF[i]['child']:
-            filho.append((BG[f]['name'], f))
-    return (nome, filho)
+            filho.append((limpa(BG[f]['name']), f))
+    return (limpa(nome), filho)
 
 
 def procIndi(s, i):
@@ -59,6 +59,11 @@ def procTexto(t):
         f = re.search(r'@(F\d+)@ *FAM', i)
         if f:
             procFam(f[1], i)
+#Funcao que remove todos os // e _ dos nomes
+def limpa(t):
+    t=re.sub(r"\_"," ",t)     #remove os _
+    t=re.sub(r"\/+","",t)     #remove os / dos nomes
+    return t
 
 
 ops, args = getopt(sys.argv[1:], "a:o:")
@@ -67,27 +72,19 @@ for ficheiro in args:
     with open(ficheiro) as f:
         txt = f.read()
     procTexto(txt)
-
 indice = []
 for key, value in BG.items():
     filename = os.path.join(root, 'paginas', str(key) + ".html")
-    indice.append([(BG[key]['name'], key)])
+    indice.append([(limpa(BG[key]['name']), key)])
     f = gTree(key)
-    nomes = f[1]
-    if nomes == []:
-        nomes = [("Unknown", "I0")]
+    nomes=f[1]
+    #Adiciona um link para regressar ao inicio a todos os individuos
+    nomes.append(("Voltar ao inicio","Index"))
     with open(filename, 'w') as fh:
         fh.write(template.render(
             h1=f[0],
             names=nomes
         ))
-# Para o caso de nao ter filhos pode voltar ao inicio
-filename = os.path.join(root, 'paginas', "I0.html")
-with open(filename, 'w') as fh:
-    fh.write(template.render(
-        h1="Indivíduo Desconhecido",
-        names=[("Voltar ao inicio", "index")]
-    ))
 # Indice
 filename = os.path.join(root, 'paginas', "Index.html")
 with open(filename, 'w') as fh:
