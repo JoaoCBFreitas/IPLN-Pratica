@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-from matplotlib import pyplot as plt
-import numpy as np
-
 # Necessario para o VSCode conseguir criar o gráfico
 # %%
+from matplotlib import pyplot as plt
+import numpy as np
 list = [10, 20, 30, 10]
 cap = [1, 2, 3, 4]
 plt.plot(cap, list)

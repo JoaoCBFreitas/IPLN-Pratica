@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+from textblob import TextBlob
+
+import fileinput
+import re
+
+polarities = {}
+for line in fileinput.input(['polarity.txt']):
+    word = re.split(',', line)[0]
+    aux = re.search(r'N0=(-?\d+)', line)
+    if aux:
+        polarity = aux.group(1)
+        polarities[word] = int(polarity)
+
+
+def analize_sentiment(tweet):
+    analysis = TextBlob(tweet)
+    if analysis.detect_language() != 'en':
+        analysis = TextBlob(str(analysis.translate(to='en')))
+        print(analysis)
+        return analysis.sentiment.polarity
+    else:
+        return analysis.sentiment.polarity
+
+
+frase = "Frase exemplo"
+print(analize_sentiment(frase))
