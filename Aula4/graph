@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 # Necessario para o VSCode conseguir criar o gráfico
-# %%
+#%%
 from matplotlib import pyplot as plt
 import numpy as np
-list = [10, 20, 30, 10]
-cap = [1, 2, 3, 4]
-plt.plot(cap, list)
-plt.xlabel("Capitulos")
-plt.ylabel("Polaridade")
-plt.title('Positividade por capitulo')
+import math
+list = [1, 0.4, 0.2, -1,-0.5,0]
+cap=[1,2,3,4,5,6]
+plt.bar(cap, list,width=0.5,color="blue")
+plt.xlabel("Polaridade")
+plt.ylabel("Capitulos")
+plt.title('Polaridade por capitulo')
 plt.show()
 # %%
