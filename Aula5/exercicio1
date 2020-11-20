@@ -1,0 +1,35 @@
+#!/usr/bin/python3
+"""
+Scraping
+pip3 install requests
+pip3 install beautifulsoup4
+
+Da homepage do JN obter os varios links, titulos e tags das noticias
+"""
+import os
+import sys
+from getopt import getopt
+import re
+import requests
+from bs4 import BeautifulSoup
+
+r=requests.get("https://www.jn.pt")
+soup=BeautifulSoup(r.text)
+pattern=r"jn.pt/\w+/"
+
+noticias=[]
+articles=soup.find_all("article")
+for article in articles:
+    header=article.h3
+    if header is None:
+        continue
+    url=header.a
+    if url is None:
+        continue
+    url_address=url["href"]
+    title=article.h2.a.text
+    if url_address.startswith("http"):
+        continue
+    noticias.append((title,url_address))
+for noticia in noticias:
+    print(noticia, "\n\n")
