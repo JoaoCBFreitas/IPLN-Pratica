@@ -17,6 +17,13 @@ r=requests.get("https://www.jn.pt")
 soup=BeautifulSoup(r.text,features="html.parser")
 pattern=r"jn.pt/\w+/"
 
+def visit_noticia(url):
+    r=requests.get(url)
+    soup=BeautifulSoup(r.text,features="html.parser")
+    content=soup.find('div',{'class':'t-article-content'})
+    print(content.prettify(),"\n-----------------")
+
+
 noticias=[]
 articles=soup.find_all("article")
 for article in articles:
@@ -35,4 +42,5 @@ for article in articles:
 
 
 for noticia in noticias:
-    print(noticia, "\n\n")
+    url='https://jn.pt'+ noticia[1]
+    visit_noticia(url)
