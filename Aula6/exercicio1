@@ -11,17 +11,36 @@ import sys
 from getopt import getopt
 import re
 import requests
+import shelve
+from tqdm import tqdm
 from bs4 import BeautifulSoup
 
 r=requests.get("https://www.jn.pt")
 soup=BeautifulSoup(r.text,features="html.parser")
 pattern=r"jn.pt/\w+/"
 
+news_dict=shelve.open('news_dict.db')
+
+
 def visit_noticia(url):
     r=requests.get(url)
     soup=BeautifulSoup(r.text,features="html.parser")
-    content=soup.find('div',{'class':'t-article-content'})
-    print(content.prettify(),"\n-----------------")
+    title=soup.find('h1',{'rel':'headline'})
+    content=soup.find('div',{'class':'t-article-content-inner'})
+    tags_section=soup.find('div',{'class':'t-article-funcs-tags-1'})
+    tags=[]
+    if tags_section:
+        tags=[t.text for t in tags_section.findAll('li')]
+    date=content.find("time")["content"]
+    content.div.decompose()
+
+    noticia={
+        'title':title.text,
+        'date':date,
+        'content':content.text,
+        'tags':tags
+    }
+    return noticia
 
 
 noticias=[]
@@ -39,8 +58,11 @@ for article in articles:
         continue
     noticias.append((title,url_address))
 
-
-
-for noticia in noticias:
+for noticia in tqdm(noticias):
     url='https://jn.pt'+ noticia[1]
-    visit_noticia(url)
+    if url not in news_dict:
+        noticia_parsed=visit_noticia(url)
+        news_dict[url]=noticia_parsed 
+
+news_dict.close()
+#TODO: adicionar percorrer noticias relacionadas
