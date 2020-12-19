@@ -1,0 +1,28 @@
+Para o Trabalho Prático 2 cada um dos grupos deverá escolher 1 dos seguintes temas:
+
+1) Dicionário de rimas
+    Desenvolver um programa com as seguintes funcionalidades:
+        - Dada uma palavra, apresentar uma lista de palavras que rimam com ela. Esta funcionalidade deve ter uma opção que permita apresentar qualquer tipo de palavras (não relacionadas com a palavra de input), ou apresentar apenas palavras que tenham alguma relação semântica/contextual com a palavra de input;
+        - Dado um ficheiro de um poema, anotar os versos que rimam entre si.
+    Para cumprir esta tarefa, deve ser feita uma recolha de poemas (usando scraping) que devem ser processados de forma a que todos sigam uma estrutura definida.
+    Por exemplo, representar cada poema num ficheiro JSON que tenha as seguintes informações:
+        Título, Autor, Data, Obra (se pertencer a uma obra com vários poemas), Tema, Parágrafos (o poema propriamente dito)
+
+#(os restantes temas serão adicionados aqui)
+
+Independentemente do tema escolhido, haverá uma bonificação para os grupos que entregarem o trabalho feito com um instalador, que facilite a instalação de dependências e preparação de ambiente.
+
+2) Restauro e recauchutagem do alinhador LF-aligner
+
+a) descarregar o LF-aligner (tanto windows como linux)
+
+b) an
+
+3) Processamento de Ted-Talks
+
+https://www.ted.com/talks/rebecca_knill_how_technology_has_changed_what_it_s_like_to_be_deaf/transcript
+https://www.ted.com/talks/rahul_mehrotra_the_architectural_wonder_of_impermanent_cities/transcript?language=es
+https://www.ted.com/talks/rahul_mehrotra_the_architectural_wonder_of_impermanent_cities/transcript?language=pt
+
+
+U=https://ted2srt.org/api/talks/1081/transcripts/download/srt?lang={$L}'

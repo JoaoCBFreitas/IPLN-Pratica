@@ -1,0 +1,115 @@
+#!/usr/bin/python3
+"""
+Scraping
+pip3 install requests
+pip3 install beautifulsoup4
+
+Da homepage do JN obter os varios links, titulos e tags das noticias
+"""
+import os
+import sys
+from getopt import getopt
+import re
+import requests
+import shelve
+from tqdm import tqdm
+from bs4 import BeautifulSoup
+
+r = requests.get("https://www.jn.pt")
+soup = BeautifulSoup(r.text, features="html.parser")
+pattern = r"jn.pt/\w+/"
+
+news_dict = shelve.open('news_dict.db')
+
+
+def visit_noticia_relacionada(url):
+    r = requests.get("https://www.jn.pt"+url)
+    soup = BeautifulSoup(r.text, features="html.parser")
+    title = soup.find('h1', {'rel': 'headline'})
+    content = soup.find('div', {'class': 't-article-content-inner'})
+    tags_section = soup.find('div', {'class': 't-article-funcs-tags-1'})
+    tags = []
+    if tags_section:
+        tags = [t.text for t in tags_section.findAll('li')]
+    if content is None:
+        conteudo = ""
+        date = ""
+    else:
+        date = content.find("time")["content"]
+        content.div.decompose()
+        conteudo = content.txt
+    if title is None:
+        titulo = ""
+    else:
+        titulo = title.text
+    noticia = {
+        'title': titulo,
+        'date': date,
+        'content': conteudo,
+        'tags': tags
+    }
+    return noticia
+
+
+def visit_noticia(url):
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, features="html.parser")
+    title = soup.find('h1', {'rel': 'headline'})
+    content = soup.find('div', {'class': 't-article-content-inner'})
+    tags_section = soup.find('div', {'class': 't-article-funcs-tags-1'})
+    tags = []
+    if tags_section:
+        tags = [t.text for t in tags_section.findAll('li')]
+
+    related_section = soup.find(
+        'section', {'class': 't-section-list-2 t-content-responsive-1'})
+    articles = []
+    if related_section:
+        articles = [t for t in related_section.findAll('li')]
+    noticiasRelacionadas = []
+    for article in articles:
+        url = article.a
+        if url is None:
+            continue
+        noticiasRelacionadas.append(url["href"])
+    # print(url)
+    # print(noticiasRelacionadas)
+    noticias = []
+    for n in noticiasRelacionadas:
+        noticias.append(visit_noticia_relacionada(n))
+
+    date = content.find("time")["content"]
+    content.div.decompose()
+    noticia = {
+        'title': title.text,
+        'date': date,
+        'content': content.text,
+        'tags': tags
+    }
+    noticias = noticias.append(noticia)
+    return noticias
+
+
+noticias = []
+articles = soup.find_all("article")
+for article in articles:
+    header = article.h3
+    if header is None:
+        continue
+    url = header.a
+    if url is None:
+        continue
+    url_address = url["href"]
+    title = article.h2.a.text
+    if url_address.startswith("http"):
+        continue
+    noticias.append((title, url_address))
+
+for noticia in tqdm(noticias):
+    url = 'https://jn.pt' + noticia[1]
+    if url not in news_dict:
+        noticia_parsed = visit_noticia(url)
+        news_dict[url] = noticia_parsed
+
+news_dict.close()
+# TODO: adicionar percorrer noticias relacionadas

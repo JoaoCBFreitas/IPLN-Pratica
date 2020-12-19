@@ -1,0 +1,49 @@
+#!/usr/bin/python3
+"""
+Script que dada uma palavra fornece uma lista de palavras que rimem
+Opção -s = Palavras têm de rimar e ter sentido semelhante
+Opção -a = Palavras têm de rimar
+Opção -f = ficheiro de poemas
+"""
+import os
+import sys
+from getopt import getopt
+import re
+from conversor import *
+
+# ARRANJAR NOVA LISTA DE PALAVRAS (MAIS PEQUENA)
+
+
+def rimaPalavra(word1, word2):
+    silword1 = get_ipa(get_stressed(get_syllables(word1))).split('.')
+    silword2 = get_ipa(get_stressed(get_syllables(word2))).split('.')
+    if silword1[-1][2:] == silword2[-1][2:]:
+        return True
+    else:
+        return False
+
+
+def rimaPalavraContext(palavra, word):
+    exit
+
+
+def processaPalavras(ficheiro, palavra, ops):
+    if '-a' in ops:
+        for word in ficheiro:
+            if rimaPalavra(palavra[0], word):
+                print(word)
+    else:  # ops =-s
+        for word in ficheiro:
+            if rimaPalavraContext(palavra, word):
+                print(word)
+
+
+ops, args = getopt(sys.argv[1:], "sfa")
+ops = dict(ops)
+if '-f' not in ops:
+    with open("wordlist.txt") as f:
+        txt = f.read()
+        palavras = re.findall(r"\b([a-z\-]+)\b", txt,
+                              re.IGNORECASE)
+        processaPalavras(palavras, args, ops)
+    f.close()
