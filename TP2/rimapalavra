@@ -10,7 +10,7 @@ import sys
 from getopt import getopt
 import re
 from conversor import *
-
+from tqdm import tqdm
 # ARRANJAR NOVA LISTA DE PALAVRAS (MAIS PEQUENA)
 
 
@@ -28,14 +28,20 @@ def rimaPalavraContext(palavra, word):
 
 
 def processaPalavras(ficheiro, palavra, ops):
+    rimas = {}
+    l = []
+    rimas[palavra[0]] = l
     if '-a' in ops:
-        for word in ficheiro:
+        for word in tqdm(ficheiro):
             if rimaPalavra(palavra[0], word):
-                print(word)
+                lista = rimas[palavra[0]]
+                lista.append(word)
+                rimas[palavra[0]] = lista
     else:  # ops =-s
         for word in ficheiro:
             if rimaPalavraContext(palavra, word):
                 print(word)
+    return rimas
 
 
 ops, args = getopt(sys.argv[1:], "sfa")
@@ -45,5 +51,5 @@ if '-f' not in ops:
         txt = f.read()
         palavras = re.findall(r"\b([a-z\-]+)\b", txt,
                               re.IGNORECASE)
-        processaPalavras(palavras, args, ops)
+        print(processaPalavras(palavras, args, ops))
     f.close()
