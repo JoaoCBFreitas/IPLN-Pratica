@@ -15,6 +15,7 @@ from conversor import *
 from tqdm import tqdm  # instalar modulo
 import spacy  # instalar modulo + python -m spacy download pt_core_news_lg
 import warnings
+import pickle
 
 
 class color:
@@ -44,53 +45,57 @@ def ajuda():
 
 
 def preencheDicionario(nome):
-    print(nome)
+    with open(nome) as f:
+        txt = f.read()
+        palavras = re.findall(r"\b([a-z\-]+)\b", txt,
+                              re.IGNORECASE)
+    f.close()
+    dicionario = {}
+    for palavra in tqdm(palavras):
+        silword = get_ipa(get_stressed(get_syllables(palavra))).split('.')
+        i = silword[-1][-2:]
+
+        if i in dicionario.keys():
+            lista = dicionario[i]
+            lista.append(palavra)
+            dicionario[i] = lista
+        else:
+            lista = [palavra]
+            if lista is None:
+                print("PALAVRA----------->"+palavra)
+            dicionario[i] = lista
+    return dicionario
 
 
-def rimaPalavra(word1, word2):
-    silword1 = get_ipa(get_stressed(get_syllables(word1))).split('.')
-    silword2 = get_ipa(get_stressed(get_syllables(word2))).split('.')
-    if silword1[-1][2:] == silword2[-1][2:]:
-        return True
-    else:
-        return False
-
-
-def rimaPalavraContext(palavra, word, nlp):
-    if rimaPalavra(palavra, word):
+def rimaPalavraContext(palavra, lista, nlp):
+    contexto = []
+    for word in tqdm(lista):
         tokens = nlp(palavra + " " + word)
         semantica = tokens[0].similarity(tokens[1])
         if semantica > 0.65:
-            return True
-        else:
-            return False
-    else:
-        return False
+            contexto.append(word)
+    return contexto
 
 
 def processaPalavras(ficheiro, palavra, ops):
     rimas = {}
     l = []
     rimas[palavra[0]] = l
+    silword = get_ipa(get_stressed(get_syllables(palavra[0]))).split('.')
+    chave = silword[-1][-2:]
     if '-a' in ops:
-        for word in tqdm(ficheiro):
-            if palavra[0] != word:
-                if rimaPalavra(palavra[0], word):
-                    lista = rimas[palavra[0]]
-                    lista.append(word)
-                    rimas[palavra[0]] = lista
+        l = ficheiro[chave]
+        rimas[palavra[0]] = l
     else:  # ops =-s
         nlp = spacy.load("pt_core_news_lg")
-        for word in ficheiro:
-            if palavra[0] != word:
-                if rimaPalavraContext(palavra[0], word, nlp):
-                    lista = rimas[palavra[0]]
-                    lista.append(word)
-                    rimas[palavra[0]] = lista
+        l = ficheiro[chave]
+        lista = rimaPalavraContext(palavra[0], l, nlp)
+        rimas[palavra[0]] = lista
     return rimas
 
 
-warnings.filterwarnings("ignore", message=r"\[W008\]", category=UserWarning)
+warnings.filterwarnings(
+    "ignore", message=r"\[W008\]", category=UserWarning)
 ops, args = getopt(sys.argv[1:], "sfahp")
 ops = dict(ops)
 if len(args) > 1 or len(ops) > 1:
@@ -105,12 +110,14 @@ else:
         exit
     elif '-p' in ops:
         # Preencher dicionario
-        preencheDicionario(args[0])
+        dicionario = preencheDicionario(args[0])
+        filename = 'dicionario'
+        outfile = open(filename, 'wb')
+        pickle.dump(dicionario, outfile)
+        outfile.close()
     else:
         # Palavras que rimam com palavra dada
-        with open("wordlist.txt") as f:
-            txt = f.read()
-            palavras = re.findall(r"\b([a-z\-]+)\b", txt,
-                                  re.IGNORECASE)
-            print(processaPalavras(palavras, args, ops))
-        f.close()
+        infile = open('dicionario', 'rb')
+        new_dict = pickle.load(infile)
+        infile.close()
+        print(processaPalavras(new_dict, args, ops))
