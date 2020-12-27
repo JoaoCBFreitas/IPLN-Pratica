@@ -4,14 +4,47 @@ Script que dada uma palavra fornece uma lista de palavras que rimem
 Opção -s = Palavras têm de rimar e ter sentido semelhante
 Opção -a = Palavras têm de rimar
 Opção -f = ficheiro de poemas
+Opção -h = Ajuda
+Opção -p = Preencher dicionario de rimas
 """
 import os
 import sys
 from getopt import getopt
 import re
 from conversor import *
-from tqdm import tqdm
-# ARRANJAR NOVA LISTA DE PALAVRAS (MAIS PEQUENA)
+from tqdm import tqdm  # instalar modulo
+import spacy  # instalar modulo + python -m spacy download pt_core_news_lg
+import warnings
+
+
+class color:
+    PURPLE = '\033[95m'
+    CYAN = '\033[96m'
+    DARKCYAN = '\033[36m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
+
+
+def ajuda():
+    print(color.RED + color.BOLD + "Preencher Dicionario                - " +
+          color.END + "rimaPalavra -p <wordlist.txt>")
+    print(color.RED + color.BOLD + "Palavras que rimam sem contexto     - " +
+          color.END + "rimaPalavra -a <palavra>")
+    print(color.RED + color.BOLD + "Palavras que rimam com contexto     - " +
+          color.END + "rimaPalavra -s <palavra>")
+    print(color.RED + color.BOLD + "Versos que rimam entre si num poema - " +
+          color.END + "rimaPalavra -f <poema.json>")
+    print(color.RED + color.BOLD +
+          "Ajuda                               - " + color.END + "rimaPalavra -h")
+
+
+def preencheDicionario(nome):
+    print(nome)
 
 
 def rimaPalavra(word1, word2):
@@ -23,8 +56,16 @@ def rimaPalavra(word1, word2):
         return False
 
 
-def rimaPalavraContext(palavra, word):
-    exit
+def rimaPalavraContext(palavra, word, nlp):
+    if rimaPalavra(palavra, word):
+        tokens = nlp(palavra + " " + word)
+        semantica = tokens[0].similarity(tokens[1])
+        if semantica > 0.65:
+            return True
+        else:
+            return False
+    else:
+        return False
 
 
 def processaPalavras(ficheiro, palavra, ops):
@@ -33,23 +74,43 @@ def processaPalavras(ficheiro, palavra, ops):
     rimas[palavra[0]] = l
     if '-a' in ops:
         for word in tqdm(ficheiro):
-            if rimaPalavra(palavra[0], word):
-                lista = rimas[palavra[0]]
-                lista.append(word)
-                rimas[palavra[0]] = lista
+            if palavra[0] != word:
+                if rimaPalavra(palavra[0], word):
+                    lista = rimas[palavra[0]]
+                    lista.append(word)
+                    rimas[palavra[0]] = lista
     else:  # ops =-s
+        nlp = spacy.load("pt_core_news_lg")
         for word in ficheiro:
-            if rimaPalavraContext(palavra, word):
-                print(word)
+            if palavra[0] != word:
+                if rimaPalavraContext(palavra[0], word, nlp):
+                    lista = rimas[palavra[0]]
+                    lista.append(word)
+                    rimas[palavra[0]] = lista
     return rimas
 
 
-ops, args = getopt(sys.argv[1:], "sfa")
+warnings.filterwarnings("ignore", message=r"\[W008\]", category=UserWarning)
+ops, args = getopt(sys.argv[1:], "sfahp")
 ops = dict(ops)
-if '-f' not in ops:
-    with open("wordlist.txt") as f:
-        txt = f.read()
-        palavras = re.findall(r"\b([a-z\-]+)\b", txt,
-                              re.IGNORECASE)
-        print(processaPalavras(palavras, args, ops))
-    f.close()
+if len(args) > 1 or len(ops) > 1:
+    print(color.CYAN + color.UNDERLINE +
+          color.BOLD + "Output Inválido, use apenas uma opção e um argumento" + color.END)
+    ajuda()
+else:
+    if '-h' in ops:
+        ajuda()
+    elif '-f' in ops:
+        # Rimas em versos de poemas
+        exit
+    elif '-p' in ops:
+        # Preencher dicionario
+        preencheDicionario(args[0])
+    else:
+        # Palavras que rimam com palavra dada
+        with open("wordlist.txt") as f:
+            txt = f.read()
+            palavras = re.findall(r"\b([a-z\-]+)\b", txt,
+                                  re.IGNORECASE)
+            print(processaPalavras(palavras, args, ops))
+        f.close()
