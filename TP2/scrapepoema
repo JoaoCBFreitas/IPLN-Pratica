@@ -14,102 +14,85 @@ import requests
 import shelve
 from tqdm import tqdm
 from bs4 import BeautifulSoup
+import json
 
-r = requests.get("https://www.jn.pt")
+r = requests.get("https://www.escritas.org/pt/autores")
 soup = BeautifulSoup(r.text, features="html.parser")
-pattern = r"jn.pt/\w+/"
-
-news_dict = shelve.open('news_dict.db')
 
 
-def visit_noticia_relacionada(url):
-    r = requests.get("https://www.jn.pt"+url)
-    soup = BeautifulSoup(r.text, features="html.parser")
-    title = soup.find('h1', {'rel': 'headline'})
-    content = soup.find('div', {'class': 't-article-content-inner'})
-    tags_section = soup.find('div', {'class': 't-article-funcs-tags-1'})
-    tags = []
-    if tags_section:
-        tags = [t.text for t in tags_section.findAll('li')]
-    if content is None:
-        conteudo = ""
-        date = ""
-    else:
-        date = content.find("time")["content"]
-        content.div.decompose()
-        conteudo = content.txt
-    if title is None:
-        titulo = ""
-    else:
-        titulo = title.text
-    noticia = {
-        'title': titulo,
-        'date': date,
-        'content': conteudo,
-        'tags': tags
-    }
-    return noticia
+def visita_poemas(urlpoemas):
+    for url in urlpoemas:
+        r = requests.get(url)
+        soup = BeautifulSoup(r.text, features="html.parser")
+        painel = soup.find('div', {'class': 'panel panel-default'})
+        if painel is None:
+            continue
+        else:
+            body = painel.find('div', {'class': 'panel-body'})
+        titulo = body.h2.text
+        aux = body.find(
+            'div', {'style': 'font-family: georgia;line-height: 30px;font-size: 16px'})
+        text = aux.text
+        conteudo = text.lstrip()
+        paragrafos = re.findall(r"^.*", conteudo, re.MULTILINE)
+        # limpeza do texto
+        paragrafos = list(filter(''.__ne__, paragrafos))
+        if '//' in paragrafos[:len(paragrafos)-1]:
+            paragrafos = paragrafos[:len(paragrafos)-1]
+        lista = []
+        for paragrafo in paragrafos:
+            if paragrafo.endswith('\r'):
+                paragrafo = paragrafo[:-1]
+            lista.append(paragrafo)
+        #######################
+        target_element = ""
+        for l in lista:
+            if ', in ' in l:
+                target_element = l
+        if ', in ' not in target_element:
+            continue
+        target_index = lista.index(target_element) + 1
+        lista[:target_index]
+
+        metadados = lista[target_index-1].split(', in ')
+        if metadados[0] is not None:
+            autor = metadados[0]
+        else:
+            autor = "N/A"
+        if metadados[1] is not None:
+            obra = metadados[1]
+        else:
+            obra = "N/A"
+        poema = {
+            'title': titulo,
+            'obra': obra,
+            'autor': autor,
+            'content': lista[:-1]
+        }
+        with open("poemas/"+titulo+".json", "w") as fp:
+            json.dump(poema, fp)
+        fp.close()
 
 
-def visit_noticia(url):
+def visita_autor(url):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, features="html.parser")
-    title = soup.find('h1', {'rel': 'headline'})
-    content = soup.find('div', {'class': 't-article-content-inner'})
-    tags_section = soup.find('div', {'class': 't-article-funcs-tags-1'})
-    tags = []
-    if tags_section:
-        tags = [t.text for t in tags_section.findAll('li')]
-
-    related_section = soup.find(
-        'section', {'class': 't-section-list-2 t-content-responsive-1'})
-    articles = []
-    if related_section:
-        articles = [t for t in related_section.findAll('li')]
-    noticiasRelacionadas = []
-    for article in articles:
-        url = article.a
-        if url is None:
-            continue
-        noticiasRelacionadas.append(url["href"])
-    # print(url)
-    # print(noticiasRelacionadas)
-    noticias = []
-    for n in noticiasRelacionadas:
-        noticias.append(visit_noticia_relacionada(n))
-
-    date = content.find("time")["content"]
-    content.div.decompose()
-    noticia = {
-        'title': title.text,
-        'date': date,
-        'content': content.text,
-        'tags': tags
-    }
-    noticias = noticias.append(noticia)
-    return noticias
+    urls = []
+    poemas = soup.find_all('div', {'class': 'panel panel-default'})
+    for poema in poemas:
+        body = poema.find('div', {'class': 'panel-body'})
+        aux = body.find('div', {'style': 'float:right'})
+        url = aux.a["href"]
+        urls.append(url)
+    return urls
 
 
-noticias = []
-articles = soup.find_all("article")
-for article in articles:
-    header = article.h3
-    if header is None:
-        continue
-    url = header.a
-    if url is None:
-        continue
-    url_address = url["href"]
-    title = article.h2.a.text
-    if url_address.startswith("http"):
-        continue
-    noticias.append((title, url_address))
+r = requests.get("https://citador.pt/poemas/autores")
+soup = BeautifulSoup(r.text, features="html.parser")
 
-for noticia in tqdm(noticias):
-    url = 'https://jn.pt' + noticia[1]
-    if url not in news_dict:
-        noticia_parsed = visit_noticia(url)
-        news_dict[url] = noticia_parsed
-
-news_dict.close()
-# TODO: adicionar percorrer noticias relacionadas
+autores = soup.find_all('div', {'class': 'panel panel-default'})
+for autor in autores:
+    aux = autor.find('div', {'style': 'float:right'})
+    url = aux.a["href"]
+    urlpoemas = visita_autor(url)
+    visita_poemas(urlpoemas)
