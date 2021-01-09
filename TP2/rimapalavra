@@ -501,13 +501,13 @@ class color:
 
 def ajuda():
     print(color.RED + color.BOLD + "Preencher Dicionario                - " +
-          color.END + "rimaPalavra -p <wordlist.txt>")
+          color.END + "rimapalavra -p <wordlist.txt>")
     print(color.RED + color.BOLD + "Palavras que rimam sem contexto     - " +
-          color.END + "rimaPalavra -a <palavra>")
+          color.END + "rimapalavra -a <palavra>")
     print(color.RED + color.BOLD + "Palavras que rimam com contexto     - " +
-          color.END + "rimaPalavra -s <palavra>")
+          color.END + "rimapalavra -s <palavra>")
     print(color.RED + color.BOLD + "Versos que rimam entre si num poema - " +
-          color.END + "rimaPalavra -f <poema.json>")
+          color.END + "rimapalavra -f <poema.json>")
     print(color.RED + color.BOLD +
           "Ajuda                               - " + color.END + "rimaPalavra -h")
 
