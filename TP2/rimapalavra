@@ -509,7 +509,7 @@ def ajuda():
     print(color.RED + color.BOLD + "Versos que rimam entre si num poema - " +
           color.END + "rimapalavra -f <poema.json>")
     print(color.RED + color.BOLD +
-          "Ajuda                               - " + color.END + "rimaPalavra -h")
+          "Ajuda                               - " + color.END + "rimapalavra -h")
 
 
 def preencheDicionario(nome):
