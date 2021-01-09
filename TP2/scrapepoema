@@ -1,11 +1,5 @@
 #!/usr/bin/python3
-"""
-Scraping
-pip3 install requests
-pip3 install beautifulsoup4
 
-Da homepage do JN obter os varios links, titulos e tags das noticias
-"""
 import os
 import sys
 from getopt import getopt
