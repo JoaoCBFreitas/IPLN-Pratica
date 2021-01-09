@@ -15,7 +15,7 @@ from tqdm import tqdm
 import spacy
 import warnings
 import pickle
-
+import json
 
 ####################################################################################################################################################
 # Vowels and consonants in the alphabet
