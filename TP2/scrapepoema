@@ -10,9 +10,6 @@ from tqdm import tqdm
 from bs4 import BeautifulSoup
 import json
 
-r = requests.get("https://www.escritas.org/pt/autores")
-soup = BeautifulSoup(r.text, features="html.parser")
-
 
 def visita_poemas(urlpoemas):
     for url in urlpoemas:
