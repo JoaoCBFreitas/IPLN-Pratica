@@ -20,6 +20,11 @@ def visita_poemas(urlpoemas):
             continue
         else:
             body = painel.find('div', {'class': 'panel-body'})
+            footer = painel.find('div', {'class': 'panel-footer'})
+        themes = footer.findAll('a', {'class': 'btn btn-default'})
+        temas = []
+        for t in themes:
+            temas.append(t.text)
         titulo = body.h2.text
         aux = body.find(
             'div', {'style': 'font-family: georgia;line-height: 30px;font-size: 16px'})
@@ -56,10 +61,13 @@ def visita_poemas(urlpoemas):
             obra = "N/A"
         poema = {
             'title': titulo,
+            'themes': temas,
             'obra': obra,
             'autor': autor,
             'content': lista[:-1]
         }
+        if not os.path.exists('poemas'):
+            os.makedirs('poemas')
         with open("poemas/"+titulo+".json", "w") as fp:
             json.dump(poema, fp)
         fp.close()

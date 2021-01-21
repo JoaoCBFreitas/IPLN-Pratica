@@ -564,18 +564,19 @@ def processaPalavras(ficheiro, palavra, ops):
 
 def processaPoema(versos):
     dictrima = {}
+    poema = versos
     ###########RETIRA O (Autor, in Obra) SE EXISTIR##########################
     target_element = ""
     for l in versos:
         if ', in ' in l:
             target_element = l
-        if ', in ' not in target_element:
+            target_index = versos.index(target_element) + 1
+            versos[:target_index]
+            metadados = versos[target_index-1].split(', in ')
+            if metadados[0] is not None:
+                poema = versos[:-1]
+        if ', in ' not in l:
             continue
-    target_index = versos.index(target_element) + 1
-    versos[:target_index]
-    metadados = versos[target_index-1].split(', in ')
-    if metadados[0] is not None:
-        poema = versos[:-1]
     #########################################################################
     for p in poema:
         verso = p.split()
