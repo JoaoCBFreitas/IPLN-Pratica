@@ -584,7 +584,7 @@ def processaPoema(versos):
             result = re.sub(
                 r'[^a-zA-ZÃÕçÇãõÂÊÎÔÛâêîôûÀÁÉÍÓÚáàéíóú]',  '', verso[len(verso)-1])
             silabas = get_ipa(get_stressed(get_syllables(result))).split('.')
-            silaba = silabas[-1]
+            silaba = silabas[-1][-2:]
             if silaba not in dictrima:
                 aux = []
                 aux.append(p)
