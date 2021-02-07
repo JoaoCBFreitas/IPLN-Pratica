@@ -1,0 +1,212 @@
+#!/usr/bin/python3
+import os
+import sys
+from getopt import getopt
+import re
+import requests
+import shelve
+import json
+import base64
+
+
+class color:
+    PURPLE = '\033[95m'
+    CYAN = '\033[96m'
+    DARKCYAN = '\033[36m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
+
+
+def ajuda():
+    print(color.RED + color.BOLD + "Login de utilizador - " +
+          color.END + "gitRepo -u <username>")
+    print(color.RED + color.BOLD + "Criar Repositório   - " +
+          color.END + "gitRepo -c <diretoria>")
+    print(color.RED + color.BOLD + "Apagar Repositório  - " +
+          color.END + "gitRepo -d <repositorio>")
+    print(color.RED + color.BOLD + "Listar Repositórios - " +
+          color.END + "gitRepo -l")
+    print(color.RED + color.BOLD +
+          "Ajuda               - " + color.END + "gitRepo -h")
+
+
+def loginuser(username):
+    val = input("Insira o token: ")
+    login = requests.get(
+        'https://api.github.com/search/repositories?q=github+api', auth=(username, val))
+    if(login.status_code == 200):
+        print("Credenciais Validadas")
+        user = {
+            "username": username,
+            "token": val
+        }
+        with open("loginGitHub.json", "w") as fp:
+            json.dump(user, fp)
+    else:
+        print("Ocorreu um erro-", login.status_code)
+    print("Utilizador Criado")
+
+
+def apagaRepo(repositorio):
+    try:
+        with open("loginGithub.json") as f:
+            data = json.load(f)
+            username = data['username']
+            token = data['token']
+            f.close()
+    except FileNotFoundError:
+        print("Ficheiro loginGithub.json não encontrado")
+        print(
+            "Crie primeiro o ficheiro através do comando gitRepo -u <username>")
+        exit()
+    login = requests.get(
+        'https://api.github.com/search/repositories?q=github+api', auth=(username, token))
+    if(login.status_code == 200):
+        print("Credenciais Validadas")
+        r = requests.get(
+            'https://api.github.com/user/repos', auth=(username, token))
+        repositorios = []
+        for repo in r.json():
+            repositorios.append(repo["name"])
+        if repositorio not in repositorios:
+            print("O repositório "+repositorio+" não existe")
+            exit()
+        else:
+            headers = {'Authorization': 'token ' + token}
+            delete = requests.delete(
+                'https://api.github.com/' + 'repos/' + username + '/' + repositorio, headers=headers)
+    else:
+        print("Ocorreu um erro-", login.status_code)
+        exit()
+    print("Repositório", repositorio, "apagado")
+
+
+def adicionaFicheiros(diretoria, username, token, repo):
+    listaficheiros = []
+    # r=root, d=directories, f = files
+    for r, d, f in os.walk(diretoria):
+        for file in f:
+            listaficheiros.append(os.path.join(r, file))
+    headers = {
+        'Authorization': 'token %s' % token,
+    }
+    for ficheiro in listaficheiros:
+        with open(ficheiro, 'rb') as file:
+            payload = {"message": "Commit Inicial",
+                       "content": base64.b64encode(file.read()).decode('utf-8')}
+            put = requests.put('https://api.github.com/' + 'repos/'+username+'/'+repo+'/contents/'+ficheiro,
+                               data=json.dumps(payload), headers=headers)
+            if(put.status_code == 201):
+                print(ficheiro, "adicionado ao repositório")
+            else:
+                print("Erro", put.status_code)
+
+
+def criaRepo(diretoria):
+    if not os.path.exists(diretoria):
+        print("Diretoria não existe")
+        exit()
+    try:
+        with open("loginGithub.json") as f:
+            data = json.load(f)
+            username = data['username']
+            token = data['token']
+            f.close()
+    except FileNotFoundError:
+        print("Ficheiro loginGithub.json não encontrado")
+        print(
+            "Crie primeiro o ficheiro através do comando gitRepo -u <username>")
+        exit()
+    login = requests.get(
+        'https://api.github.com/search/repositories?q=github+api', auth=(username, token))
+    if(login.status_code == 200):
+        print("Credenciais Validadas")
+        val = input("Insira o nome do novo repositório: ")
+        r = requests.get('https://api.github.com/user/repos',
+                         auth=(username, token))
+        repositorios = []
+        for repo in r.json():
+            repositorios.append(repo["name"])
+        if val in repositorios:
+            print("Erro, repositório já existe")
+            exit()
+        else:
+            description = input("Insira uma descrição: ")
+            p = None
+            while p is None:
+                privado = input("Repositório Privado (y/n): ")
+                if privado == "y":
+                    p = True
+                elif privado == "n":
+                    p = False
+            payload = {'name': val, 'description': description,
+                       'auto_init': 'true', 'private': p}
+            post = requests.post('https://api.github.com/' + 'user/repos',
+                                 auth=(username, token), data=json.dumps(payload))
+            print("Repositorio Criado")
+            adicionaFicheiros(diretoria, username, token, val)
+    else:
+        print("Ocorreu um erro-", login.status_code)
+
+
+def listarRepos():
+    with open("loginGithub.json") as f:
+        data = json.load(f)
+        username = data['username']
+        token = data['token']
+        f.close()
+        login = requests.get(
+            'https://api.github.com/search/repositories?q=github+api', auth=(username, token))
+        if(login.status_code == 200):
+            r = requests.get(
+                'https://api.github.com/user/repos', auth=(username, token))
+            privados = []
+            publicos = []
+            for repo in r.json():
+                if(repo["private"] == True):
+                    privados.append(repo["name"])
+                else:
+                    publicos.append(repo["name"])
+            for public in publicos:
+                print(public, "<---> Público")
+            for private in privados:
+                print(private, "<---> Privado")
+        else:
+            print("Ocorreu um erro-", login.status_code)
+
+
+def main():
+    ops, args = getopt(sys.argv[1:], "c:d:u:hl")
+    ops = dict(ops)
+    if '-h' in ops:
+        ajuda()
+        exit()
+    elif '-u' in ops:
+        arg = ops["-u"]
+        loginuser(arg)
+        exit()
+    elif '-c' in ops:
+        arg = ops["-c"]
+        criaRepo(arg)
+        exit()
+    elif '-d' in ops:
+        arg = ops["-d"]
+        apagaRepo(arg)
+        exit()
+    elif '-l' in ops:
+        listarRepos()
+        exit()
+    else:
+        print(color.CYAN + color.UNDERLINE +
+              color.BOLD + "Input Inválido" + color.END)
+        ajuda()
+
+
+if __name__ == '__main__':
+    main()
+    exit()
