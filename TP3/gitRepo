@@ -155,29 +155,35 @@ def criaRepo(diretoria):
 
 
 def listarRepos():
-    with open("loginGithub.json") as f:
-        data = json.load(f)
-        username = data['username']
-        token = data['token']
-        f.close()
-        login = requests.get(
-            'https://api.github.com/search/repositories?q=github+api', auth=(username, token))
-        if(login.status_code == 200):
-            r = requests.get(
-                'https://api.github.com/user/repos', auth=(username, token))
-            privados = []
-            publicos = []
-            for repo in r.json():
-                if(repo["private"] == True):
-                    privados.append(repo["name"])
-                else:
-                    publicos.append(repo["name"])
-            for public in publicos:
-                print(public, "<---> Público")
-            for private in privados:
-                print(private, "<---> Privado")
-        else:
-            print("Ocorreu um erro-", login.status_code)
+    try:
+        with open("loginGithub.json") as f:
+            data = json.load(f)
+            username = data['username']
+            token = data['token']
+            f.close()
+    except FileNotFoundError:
+        print("Ficheiro loginGithub.json não encontrado")
+        print(
+            "Crie primeiro o ficheiro através do comando gitRepo -u <username>")
+        exit()
+    login = requests.get(
+        'https://api.github.com/search/repositories?q=github+api', auth=(username, token))
+    if(login.status_code == 200):
+        r = requests.get(
+            'https://api.github.com/user/repos', auth=(username, token))
+        privados = []
+        publicos = []
+        for repo in r.json():
+            if(repo["private"] == True):
+                privados.append(repo["name"])
+            else:
+                publicos.append(repo["name"])
+        for public in publicos:
+            print(public, "<---> Público")
+        for private in privados:
+            print(private, "<---> Privado")
+    else:
+        print("Ocorreu um erro-", login.status_code)
 
 
 def main():
