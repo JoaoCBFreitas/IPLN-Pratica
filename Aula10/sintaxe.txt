@@ -1,0 +1,29 @@
+titulo= !Universidade do Minho
+autor= !ricardo; maria; andré; jj
+data= !2021
+
+#Escolas
+
+PT: !Escola de Direito
+EN: !Law School
+.
+PT: !Escola de Engenharia
+EN: !School of Engineering
+.
+#Cursos
+
+PT: !Mestrado Integrado em Engenharia Informática
+PT: !MIEI (+sigla)
+EN: !Integrated Masters in Informatics Engineering
+.
+PT: !Licenciatura em Ciências da Computação
+PT: !LCC (+sigla)
+EN: !Bachelour in Computer Science
+.
+#Disciplinas
+
+PT: !Introdução ao Processamento de Linguagem Natural
+PT: !IPLN
+EN: !Introduction to Natural Language Processing
+POF: !MIEI
+.

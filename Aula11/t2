@@ -1,0 +1,6 @@
+v = [[1,2,3],[3,5,5]]
+
+r = []
+for a in v:
+   r.extend(a)
+print( r)

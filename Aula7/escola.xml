@@ -1,0 +1,19 @@
+<escola nome="UM">
+    <turmas>
+        <turma>
+            <aluno>
+                <nome>Aluno1</nome>
+            </aluno>
+            <aluno trabEstudante="true">
+                <nome>Aluno2</nome>
+            </aluno>
+        </turma>
+    </turmas>
+    <docentes>
+        <docente>
+            <nome>Docente1</nome>
+            <departamento>DI</departamento>
+
+        </docente>
+    </docentes>
+</escola>

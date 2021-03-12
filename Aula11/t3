@@ -1,0 +1,5 @@
+def zipiterado(esq,ll):
+    return [ list(zip(esq,x)) for x in ll ]
+
+
+print(zipiterado(["a","b"],[[1,2],[3,4]]))

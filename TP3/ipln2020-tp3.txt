@@ -1,0 +1,173 @@
+========
+IPLN,
+2020-21
+TP3
+========
+
+Enunciado:
+  A) aprenda um dos seguintes módulos e 
+  B) crie um exemplo de demonstração
+   ligado a tópicos desta disciplina (PLN / scripting)
+
+
+1) requests 
+       + automatizar criação de projectos git
+         e possivelmente copiar para lá uma versão inicial
+
+Joao Bernardo
+
+2) lark-parser 
+       + reimplementar o exemplo do dicionário  (nas aulas ply)
+
+3) inotify / tesseract / inotify-simple
+
+       printscreen -- faz aparecer ficheiro em ~/Pictures
+         ... estar à espreita com inotify,
+         ... processar e arrumar
+
+       +  screenshot-ocr   diario de bordo
+          if hora ∈ aula --> juntar printscreens ao diario de bordo da aula
+            printscreen -> save as txt --> ocr da imagem --> copiar texto
+              e imagem para diário de bordo
+            printscreen -> save as img --> copiar D.B.
+          no final da aula fechar o D.B.,
+
+Ricardo
+
+4) rasa - chatbot
+        criar um chatbot ...
+
+Ana Rita
+
+5) chatbot baseado no NLTK  partindo de um chatbot do nltk 
+     começar por ler:
+     https://github.com/parulnith/Building-a-Simple-Chatbot-in-Python-using-NLTK
+
+Ana Rita
+
+6) rdflib :
+     dado uma ontologia em formato turtle (ou algo que o rdf seja capaz de
+importar) 
+        . inferir (usando um dos reasoner rdflib OU levando em conta apenas
+                    as relações inversas owl:inverseOf,  owl:SymmetricProperty) 
+        . e gerar páginas HTML estáticas (para cada Classe, Individuo)
+                    o mais hiperligadas possiveis
+        . ou gerar LaTeX 
+        . ou XDXF dicionaries
+
+7) v1) lucene pylucene lupyne
+   v2) ou solr ( pysolr)
+
+8) elasticsearch
+      apt python3-elasticsearch
+
+
+9) hunspell
+         sudo apt install hunspell-dev hunspell-pt-pt
+         pyhunspell / hunspell
+
+     +
+         dado o resultado de OCR (TXT)
+             procurar palavras desconhecidas
+             se existe sugestão única + len > 5
+             em w1\n\w2 e desc(w$) mas conhecida ww2 ...
+         detectar linhas separadoras...
+
+         modelos de lingua
+
+         hunspell com alguma aprendizagem (assistida?); dicionário 
+         para a hemeroteca do Norte.
+
+
+9v) variante:
+       usar tesseract OCR + modelo de lingua + 
+
+
+10) spacy + Named entity-based Text Anonymization
+
+Antonio Manuel
+Ricardo
+
+11)  flask 
+   + micro google forms: 
+
+   a partir de uma lista de campos, criar uma 
+   aplicação flask que leia esses campos e acrescente a uma folha de
+   cálculo ou a um CSV.
+    - eventualmente com a opção (chave=campo / reescreve se chave
+    identica)
+
+André Vieira
+
+12) so / subprocess???
+   +
+   Criar um file-system associativo para fotos(com meta)
+   * muitas fotos
+         foto1=f1.jpg, id=1, keys=#Bragança,#1921,#futebol ,desc="..."
+   * uma Taxonomia=
+          tema 
+             desporto 
+                futebol
+          local 
+             Portugal 
+                Bragança
+   
+   * uma "shell"
+      foto-cd local/Portugal
+      foto-ls -l   ... mostra meta
+      foto-ls -f   ... mostra imagens
+      foto-grep ...
+
+12v) 
+doc = id * meta * bits
+    + taxonomia de tags
+shelve  (para os metadados)
+filesystem para fotos, doc em geral
+
+shell para navegar na taxonomia,
+   cd, grep 
+
+13) usando selenium / chromedriver / pyinput (para ler teclas)
+
+       * controlor um browser fullscreen por teclas ou script
+
+       * associar teclas a eventos (tocar ficheiro audio no chrome,
+          carregar uma imagem, mostar um texto)
+          Exmplo Teatro, activar uma voz-off, mudar o cenário projectado de
+             fundo, passar um bocado de video, ...
+
+       * criar um ficheiro para uma apresentação temporizada
+          (1s: a.jpg
+           10s: x.html
+           ...
+          )
+           
+
+14) ged4py ou gedcom / sqlite
+
+   criar um filesystem genealógico
+      * guardar num SQLite??
+      * gen-find Manel
+        gen-cd Pai  F1 F2 ...
+        gen-ls filhos
+        gen-pp...
+
+
+====
+
+# prompt toolkit
+# os
+# subprocess
+# requests
+# matplotlib
+# pickle
+# pandas
+# numpy
+# beautifulSoup
+# flask
+# django
+# base de dados ? mongo/ SQLite
+# inotify
+# tesseract
+# vim+python https://vimhelp.org/if_pyth.txt.html
+

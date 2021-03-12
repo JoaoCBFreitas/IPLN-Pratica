@@ -1,0 +1,480 @@
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="author" content="https://www.ipma.pt">
+  <meta name="keywords" content="Instituto Português do Mar e da Atmosfera, Mar, oceano, atmosfera, Instituto de Meteorologia, IPIMAR, o tempo, previsão do tempo, previsão meteorológica, clima, Portugal, sismologia, sismos" lang="pt">
+  <meta name="keywords" content="forecast, weather, Portugal, climate, seismic, sea, ocean" lang="en">
+
+	<title>IPMA - Previsão 10 dias, horária diária, localidade </title>
+
+	<link rel="shortcut icon" type="image/x-icon" href="/opencms/bin/icons/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="/opencms/system/modules/ipma.website/resources/ipma_website.css">
+	<link rel="stylesheet" type="text/css" href="/export/system/modules/ipma.website/resources/css/font-awesome-4.7.min.css">
+	<link rel="stylesheet" type="text/css" href="/export/system/modules/ipma.website/resources/css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="/export/system/modules/ipma.website/resources/css/colorbox.css">
+	<link rel="stylesheet" type="text/css" href="/export/system/modules/ipma.website/resources/css/leaflet-0.7.7.css">
+
+	<script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script><script type="text/javascript" src="/opencms/system/modules/ipma.website/resources/js/leaflet-0.7.7.js"></script>
+	<script type="text/javascript" src="/opencms/system/modules/ipma.website/resources/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/opencms/system/modules/ipma.website/resources/js/jquery.bxslider.js"></script>
+	<script type="text/javascript" src="/opencms/system/modules/ipma.website/resources/js/jquery.colorbox-min.js"></script>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <body><div id="BG_Bot">
+    <div id="Container">
+    	<!-- START HEADER -->
+    	
+	     
+
+
+
+    <div id="Header">
+      <div class="col_esq"><h1><a href="/opencms/pt/index.html" accesskey="h"><img src="/opencms/system/modules/ipma.website/resources/images/logo-ipma-17-180x48.png" alt="Instituto Portugues do Mar e Atmosfera - Homepage"></a></h1></div>
+        <h2 id="Top_h2">
+          <ul id="NavList">
+<li class=""><a href="/opencms/pt/oipma/">Quem somos</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li class=""><a href="/opencms/pt/oipma/onde/index.jsp">Onde estamos</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li class=""><a href="/opencms/pt/investigacao/investigadores/index.jsp">Conselho científico</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li class=""><a href="/opencms/pt/recrutamento/index.jsp"><span style="font-size:13px;color:#1f87c6;">Recrutamento</span></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li class=""><a href="/opencms/pt/investigacao/index.jsp">Projetos</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li class=""><a href="/opencms/pt/publicacoes/index.jsp"><span style="font-size:13px;color:#1f87c6;">e</span>Biblioteca</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li class=""><a href="/opencms/pt/enciclopedia/index.html">Enciclopédia <span style="font-size:13px;color:#1f87c6;">ipma</span></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li class=""><a href="/opencms/pt/siteinfo/contacto.jsp">Contactos</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li class="ic_en"><a href="/opencms/en/index.html">English</a></li>
+      </ul>
+    </h2>
+
+	<div class="pesq">
+		<form method="post" name="searchform" action="/pt/pesquisa/searchresult.jsp" onsubmit="return validateSearch()">
+			<input type="hidden" name="index" value="ipma PT">
+			<input type="hidden" name="field" value="title">
+			<input type="hidden" name="field" value="keywords">
+			<input type="hidden" name="field" value="description">
+			<input type="hidden" name="field" value="content">
+			<label for="query"></label>
+			<input type="text" class="pesq_int_box" id="query" name="query" value="Pesquisa" onfocus="if(this.value=='Pesquisa') this.value=''" onblur="if(this.value=='') this.value='Pesquisa'">
+			<input type="submit" class="pesq_button" value="ok">
+		</form>
+  </div>
+
+<script type="text/javascript">
+//  var $j = jQuery.noConflict(); 
+  $(document).ready(function(){ 
+    $('ul#mainnav li').hover( function(){
+      $(this).addClass('hover');
+      $( 'ul.subnav', this ).css('visibility', 'visible');        
+    }, function(){
+      $(this).removeClass('hover');
+      $( 'ul.subnav', this ).css('visibility', 'hidden');
+    });
+});
+</script>
+<div>
+  <ul id="mainnav">
+    <li><span>Tempo</span><ul class="subnav">
+<li><a title="Previsão significativa" href="/opencms/pt/otempo/prev.significativa/">Previsão significativa</a></li>
+<li><a title="Previsão 10 dias e horária" href="/opencms/pt/otempo/prev.localidade.hora/">Previsão 10 dias e horária</a></li>
+<li><a title="Previsão descritiva" href="/opencms/pt/otempo/prev.descritiva/">Previsão descritiva</a></li>
+<li><a title="Avisos Meteorológicos" href="/opencms/pt/otempo/prev-sam/">Avisos Meteorológicos</a></li>
+<li><a title="Previsão Índice ultravioleta" href="/opencms/pt/otempo/prev.uv/">Previsão Índice ultravioleta</a></li>
+<li><a title="Cartas meteorológicas" href="/opencms/pt/otempo/prev.numerica/">Cartas meteorológicas</a></li>
+<li><a title="Perfis verticais" href="/opencms/pt/otempo/obs.sondagens/">Perfis verticais</a></li>
+<li><a title="Imagens satélite" href="/opencms/pt/otempo/obs.satelite/">Imagens satélite</a></li>
+<li><a title="Imagens radar" href="/opencms/pt/otempo/obs.radar/">Imagens radar</a></li>
+<li><a title="Descargas elétricas" href="/opencms/pt/otempo/obs.dea/">Descargas elétricas</a></li>
+<li><a title="Estações Online" href="/opencms/pt/otempo/obs.superficie/">Estações Online</a></li>
+<li><a title="Previsão no mundo" href="/opencms/pt/otempo/prev.mundo/">Previsão no mundo</a></li>
+<li><a title="Previsão ciclones tropicais" href="/opencms/pt/otempo/prev.ciclones/">Previsão ciclones tropicais</a></li>
+<li><a title="Previsão período alargado" href="/opencms/pt/otempo/prev.alargado/">Previsão período alargado</a></li>
+<li><a title="Testemunhou um fenómeno meteorológico?" href="/opencms/pt/otempo/observar/">Testemunhou um fenómeno meteorológico?</a></li>
+</ul></li>
+<li><span>Mar</span><ul class="subnav">
+<li><a title="Praias e Portos" href="/opencms/pt/maritima/costeira/">Praias e Portos</a></li>
+<li><a title="Previsão para navegação" href="/opencms/pt/maritima/boletins/">Previsão para navegação</a></li>
+<li><a title="Previsão altura significativa" href="/opencms/pt/maritima/hs/">Previsão altura significativa</a></li>
+<li><a title="Previsão período de pico" href="/opencms/pt/maritima/tp/">Previsão período de pico</a></li>
+<li><a title="Previsão de corrente" href="/opencms/pt/maritima/currents/">Previsão de corrente</a></li>
+<li><a title="Previsão de temperatura" href="/opencms/pt/maritima/sst/">Previsão de temperatura</a></li>
+<li><a title="Previsão da elevação" href="/opencms/pt/maritima/ssh/">Previsão da elevação</a></li>
+</ul></li>
+<li><span>Sismos</span><ul class="subnav">
+<li><a title="Atividade sísmica" href="/opencms/pt/geofisica/sismicidade/">Atividade sísmica</a></li>
+<li><a title="Shakemap" href="/opencms/pt/geofisica/shakemap/">Shakemap</a></li>
+<li><a title="Inquérito sismo 1980" href="/opencms/pt/geofisica/sismo1980/">Inquérito sismo 1980</a></li>
+<li><a title="Inquérito sismo 1969" href="/opencms/pt/geofisica/sismo1969/">Inquérito sismo 1969</a></li>
+<li><a title="Sentiu um sismo?" href="/opencms/pt/geofisica/informe/">Sentiu um sismo?</a></li>
+<li><a title="Comunicados" href="/opencms/pt/geofisica/comunicados/">Comunicados</a></li>
+<li><a title="Tensor Momento Sísmico" href="/opencms/pt/geofisica/tensor/">Tensor Momento Sísmico</a></li>
+<li><a title="Escalas sísmicas" href="/opencms/pt/geofisica/escalas/">Escalas sísmicas</a></li>
+<li><a title="Rede sísmica" href="/opencms/pt/geofisica/redes/">Rede sísmica</a></li>
+<li><a title="Medidas em caso sismo" href="/opencms/pt/geofisica/medidas/">Medidas em caso sismo</a></li>
+<li><a title="Projetos" href="/opencms/pt/geofisica/projetos/">Projetos</a></li>
+<li><a title="Boletins" href="/opencms/pt/geofisica/boletins/">Boletins</a></li>
+</ul></li>
+<li><span>Clima</span><ul class="subnav">
+<li><a title="Acompanhamento do clima" href="/opencms/pt/oclima/monitorizacao/">Acompanhamento do clima</a></li>
+<li><a title="Extremos climatológicos" href="/opencms/pt/oclima/extremos.clima/">Extremos climatológicos</a></li>
+<li><a title="Normais climatológicas" href="/opencms/pt/oclima/normais.clima/">Normais climatológicas</a></li>
+<li><a title="Séries longas" href="/opencms/pt/oclima/series.longas/">Séries longas</a></li>
+<li><a title="Monitorização diária" href="/opencms/pt/oclima/monitoriza.dia/">Monitorização diária</a></li>
+<li><a title="Monitorização mensal" href="/opencms/pt/oclima/monitoriza.mensal/">Monitorização mensal</a></li>
+<li><a title="Monitorização da Seca" href="/opencms/pt/oclima/observatorio.secas/">Monitorização da Seca</a></li>
+<li><a title="Boletins climatológicos" href="/opencms/pt/oclima/boletins/">Boletins climatológicos</a></li>
+<li><a title="Indices Biometeorológicos" href="/opencms/pt/oclima/biometeo/">Indices Biometeorológicos</a></li>
+<li><a title="Gases com efeito estufa" href="/opencms/pt/oclima/gases.estufa/">Gases com efeito estufa</a></li>
+<li><a title="Portal do Clima" href="/opencms/pt/oclima/portaldoclima/">Portal do Clima</a></li>
+<li><a title="Serviços de Clima" href="/opencms/pt/oclima/servicos.clima/">Serviços de Clima</a></li>
+</ul></li>
+<li><span>Bivalves</span><ul class="subnav">
+<li><a title="Bivalves, ponto situação" href="/opencms/pt/bivalves/index.jsp">Bivalves, ponto situação</a></li>
+<li><a title="Zonas de Produção" href="/opencms/pt/bivalves/zonas/">Zonas de Produção</a></li>
+<li><a title="Documentos e Legislação" href="/opencms/pt/bivalves/docs/">Documentos e Legislação</a></li>
+<li><a title="Biotoxinas" href="/opencms/pt/bivalves/biotox/">Biotoxinas</a></li>
+<li><a title="Fitoplâncton Nocivo" href="/opencms/pt/bivalves/fito/">Fitoplâncton Nocivo</a></li>
+<li><a title="Metais  Contaminantes" href="/opencms/pt/bivalves/metais/">Metais  Contaminantes</a></li>
+<li><a title="Microbiologia" href="/opencms/pt/bivalves/micro/">Microbiologia</a></li>
+<li><a title="Moluscos bivalves" href="/opencms/pt/bivalves/recursos/">Moluscos bivalves</a></li>
+<li><a title="Histórico interdições" href="/opencms/pt/bivalves/historico/">Histórico interdições</a></li>
+</ul></li>
+<li class=""><span>Pescas e aquacultura</span><ul class="subnav" style="visibility: hidden;">
+<li><a title="Recursos Vivos" href="/opencms/pt/pescas/recursos/">Recursos Vivos</a></li>
+<li><a title="Estação Piscicultura de Olhão" href="/opencms/pt/pescas/eppo/">Estação Piscicultura de Olhão</a></li>
+<li><a title="Estação oceanogra. Cascais" href="/opencms/pt/pescas/cascaiswatch/">Estação oceanogra. Cascais</a></li>
+<li><a title="Projectos" href="/opencms/pt/pescas/projetos/">Projectos</a></li>
+<li><a title="Divulgação" href="/opencms/pt/pescas/divulgacao/">Divulgação</a></li>
+<li><a title="Espaço Aquicultura" href="/opencms/pt/pescas/aquicultura/">Espaço Aquicultura</a></li>
+</ul></li>
+<li><span>Aeronáutica</span><ul class="subnav">
+<li><a title="Mensagens TAF e METAR" href="/opencms/pt/aeronautica/taf.metar/">Mensagens TAF e METAR</a></li>
+<li><a title="Self-briefing" href="/opencms/pt/aeronautica/selfbriefing/">Self-briefing</a></li>
+<li><a title="Saber mais, aeronáutica." href="/opencms/pt/aeronautica/saber.mais/">Saber mais, aeronáutica.</a></li>
+</ul></li>
+<li><span>Agricultura</span><ul class="subnav">
+<li><a title="Evapotranspiração [ET0]" href="/opencms/pt/agrometeorologia/et/">Evapotranspiração [ET0]</a></li>
+<li><a title="Número horas frio" href="/opencms/pt/agrometeorologia/fruticultura/">Número horas frio</a></li>
+<li><a title="Percentagem água solo" href="/opencms/pt/agrometeorologia/smi/">Percentagem água solo</a></li>
+<li><a title="Vegetation Health Index (VHI)" href="/opencms/pt/agrometeorologia/vhi/">Vegetation Health Index (VHI)</a></li>
+<li><a title="Fração radiação absorvida (FAPAR)" href="/opencms/pt/agrometeorologia/fapar/">Fração radiação absorvida (FAPAR)</a></li>
+<li><a title="Dados diários" href="/opencms/pt/agrometeorologia/temperatura/">Dados diários</a></li>
+<li><a title="Boletins agrometeo" href="/opencms/pt/agrometeorologia/boletins/">Boletins agrometeo</a></li>
+<li><a title="Mais informação" href="/opencms/pt/agrometeorologia/info/">Mais informação</a></li>
+</ul></li>
+<li><span>Navios</span><ul class="subnav">
+<li><a title="NI Mário Ruivo" href="/opencms/pt/navios/mar-portugal/">NI Mário Ruivo</a></li>
+<li><a title="NI Noruega" href="/opencms/pt/navios/noruega/">NI Noruega</a></li>
+<li><a title="NI Diplodus" href="/opencms/pt/navios/diplodus/">NI Diplodus</a></li>
+<li><a title="NI Tellina" href="/opencms/pt/navios/tellina/">NI Tellina</a></li>
+</ul></li>
+<li class=""><span>Espaço</span><ul class="subnav" style="visibility: hidden;">
+<li><a title="Satélite MSG" href="/opencms/pt/espaco/msg/">Satélite MSG</a></li>
+<li><a title="Imagens do sol" href="/opencms/pt/espaco/sol/">Imagens do sol</a></li>
+</ul></li>
+<li><span>Fogos Rurais</span><ul class="subnav">
+<li><a title="Risco incêndio Continente" href="/opencms/pt/riscoincendio/rcm.pt/">Risco incêndio Continente</a></li>
+<li><a title="Risco Incêndio Madeira" href="/opencms/pt/riscoincendio/rcm.md/">Risco Incêndio Madeira</a></li>
+<li><a title="FWI, índice perigo de incêndio" href="/opencms/pt/riscoincendio/fwi/">FWI, índice perigo de incêndio</a></li>
+</ul></li>
+
+  </ul>
+
+<!--	<div id="dropmenu">
+    <div class="menu_h">-->
+
+<!--		</div>
+	</div>-->
+</div>
+
+
+
+
+
+
+
+    	<!-- END HEADER -->
+    	<!-- START MAIN -->
+    	<div id="MainContent">
+    		<!-- START LEFT COLUMN -->
+    		<div id="LeftCol_container">
+			
+
+
+<div class="news_esq"><h2 class="bckg_generic border_block_title">Noticias</h2>
+<div id="stop-news-left"> <ul><li><h3>Observação dos Oceanos </h3>
+<div><img src="/pt/media/noticias/imagens/2020/Imag_EOOS.png" onerror="this.src=&quot;/export/sites/ipma/pt/media/noticias/imagens/2020/Imag_EOOS.png&quot;" alt="Imagem estudo" class="centered-and-cropped" style="width:170px; height:90px"><a href="/opencms/pt/media/noticias/news.detail.jsp?f=/pt/media/noticias/textos/EOOS.html">Investigador do IPMA é ponto de contato </a><br><span>2020-12-03</span></div>
+<h3>Divulgação de Estudo</h3>
+<div><img src="/pt/media/noticias/imagens/2020/Taurina_mini.png" onerror="this.src=&quot;/export/sites/ipma/pt/media/noticias/imagens/2020/Taurina_mini.png&quot;" alt="Imagem estudo" class="centered-and-cropped" style="width:170px; height:90px"><a href="/opencms/pt/media/noticias/news.detail.jsp?f=/pt/media/noticias/textos/artigo_taurina.html">Estudo sobre alimentação do pescado</a><br><span>2020-12-02</span></div>
+<h3>27 nov 2020</h3>
+<div><img src="/pt/media/noticias/imagens/2020/ACCORD_2_mini.png" onerror="this.src=&quot;/export/sites/ipma/pt/media/noticias/imagens/2020/ACCORD_2_mini.png&quot;" alt="ACCORD - Consortium for Convection-scale modelling Research and Development" class="centered-and-cropped" style="width:170px; height:90px"><a href="/opencms/pt/media/noticias/news.detail.jsp?f=/pt/media/noticias/textos/ACCORD.html">Consórcio de Serviços Meteorológicos</a><br><span>2020-11-30</span></div>
+</li></ul></div><ul class="none"><li><span><a href="/opencms/pt/media/noticias/">Ver mais notícias</a></span></li></ul></div>
+
+
+
+    		</div>
+        	<!-- END LEFT COLUMN -->
+        	<!-- START BREAD -->
+        	<div id="Bread_container">
+     		  	
+
+
+
+
+
+<!--TEMPLATE MAIN CONTAINER WITH NO SEARCH-->
+
+
+<span class="bread_lks"><a href="/opencms/pt/">IPMA</a><span>&gt;</span><a href="/opencms/pt/otempo/">Tempo</a><span>&gt;</span><a href="/opencms/pt/otempo/prev.localidade.hora/">Previsão localidade horária</a></span>
+
+
+
+<!--TEMPLATE FOR PRINT PAGE-->
+
+
+        	</div>
+        	<!-- END BREAD -->
+        	<!-- START CENTRAL & RIGHT CONTENT  -->        
+        	<div id="CRcol_container"><a name="contenttop"></a>
+
+
+
+
+
+<link href="/opencms/bin/styles/prev.localidade.hora.css" rel="stylesheet">
+
+<div class="local-picker">
+        <label for="district">Selecione Distrito/Ilha: </label>
+        <select id="district"><option value="">--</option><option value="Aveiro">Aveiro</option><option value="Beja">Beja</option><option value="Braga">Braga</option><option value="Bragança">Bragança</option><option value="Castelo Branco">Castelo Branco</option><option value="Coimbra">Coimbra</option><option value="Évora">Évora</option><option value="Faro">Faro</option><option value="Guarda">Guarda</option><option value="Leiria">Leiria</option><option selected="" value="Lisboa">Lisboa</option><option value="Portalegre">Portalegre</option><option value="Porto">Porto</option><option value="Santarém">Santarém</option><option value="Setúbal">Setúbal</option><option value="Viana do Castelo">Viana do Castelo</option><option value="Vila Real">Vila Real</option><option value="Viseu">Viseu</option><option value="Madeira" class="chg-option">Madeira</option><option value="Porto Santo">Porto Santo</option><option value="Santa Maria" class="chg-option">Santa Maria</option><option value="São Miguel">São Miguel</option><option value="Terceira">Terceira</option><option value="Graciosa">Graciosa</option><option value="São Jorge">São Jorge</option><option value="Pico">Pico</option><option value="Faial">Faial</option><option value="Flores">Flores</option><option value="Corvo">Corvo</option></select>
+        <label for="locations">Selecione a Cidade/Vila: </label>
+	<select id="locations"><option value="">--</option><option value="1030100">Amares</option><option value="1030200">Barcelos</option><option value="1030300">Braga</option><option value="1030400">Cabeceiras de Basto</option><option value="1030500">Celorico de Basto</option><option value="1030600">Esposende</option><option value="1030700">Fafe</option><option value="1030800">Guimarães</option><option value="1030900">Póvoa de Lanhoso</option><option value="1030321">Praia da Apúlia</option><option value="1030622">Praia de Esposende</option><option value="1030621">Praia de Ofir</option><option value="1031000">Terras de Bouro</option><option value="1031100">Vieira do Minho</option><option value="1031200">Vila Nova de Famalicão</option><option value="1031300">Vila Verde</option><option value="1031400">Vizela</option></select>
+        <span id="last_update" class="floatR" style="margin-top: 30px; font-size: 10px; font-style: italic;">Última atualização: <i>2020-12-04 07:47:29 (UTC)</i></span>
+</div>
+<script>
+	function updateHeader (district, local) {
+		$('.bckg_blue.local-header').text(district + ', ' + local);
+	}
+	var page_lang = 'pt'.toUpperCase();
+</script>
+<h2 class="bckg_blue local-header">Braga, Braga</h2>
+<div id="weekly"><div id="4" class="weekly-column active"><div class="date">4 Sex</div><img class="weatherImg" src="/opencms/bin/icons/svg/weather/w_ic_d_07anim.svg" title="Chuva/aguaceiros fracos"><span class="tempMin">3º</span><span class="tempMax">9º</span><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: Fraco de NW" title="Vento: Fraco de NW"><div class="windDir">NW</div><div class="precProb" alt="Probabilidade precipitação: 100%" title="Probabilidade precipitação: 100%">100% <sup><i class="fa fa-tint" aria-hidden="true"></i></sup></div><div class="wrapper"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG">Laranja</a></div></div><img class="iuvImg" src="/opencms/bin/images.site/otempo/uv1.gif" alt="I. Ultravioleta: 1" title="IUV: 1"></div><div id="5" class="weekly-column"><div class="date">5 Sáb</div><img class="weatherImg" src="/opencms/bin/icons/svg/weather/w_ic_d_07anim.svg" title="Chuva/aguaceiros fracos"><span class="tempMin">2º</span><span class="tempMax">10º</span><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: Fraco de NW" title="Vento: Fraco de NW"><div class="windDir">NW</div><div class="precProb" alt="Probabilidade precipitação: 98%" title="Probabilidade precipitação: 98%">98% <sup><i class="fa fa-tint" aria-hidden="true"></i></sup></div><div class="wrapper"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG">Laranja</a></div></div><img class="iuvImg" src="/opencms/bin/images.site/otempo/uv2.gif" alt="I. Ultravioleta: 2" title="IUV: 2"></div><div id="6" class="weekly-column"><div class="date">6 Dom</div><img class="weatherImg" src="/opencms/bin/icons/svg/weather/w_ic_d_06anim.svg" title="Chuva/aguaceiros"><span class="tempMin">4º</span><span class="tempMax">12º</span><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: Fraco de NW" title="Vento: Fraco de NW"><div class="windDir">NW</div><div class="precProb" alt="Probabilidade precipitação: 100%" title="Probabilidade precipitação: 100%">100% <sup><i class="fa fa-tint" aria-hidden="true"></i></sup></div><div class="wrapper"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG">Laranja</a></div></div><img class="iuvImg" src="/opencms/bin/images.site/otempo/uv1.gif" alt="I. Ultravioleta: 1" title="IUV: 1"></div><div id="7" class="weekly-column"><div class="date">7 Seg</div><img class="weatherImg" src="/opencms/bin/icons/svg/weather/w_ic_d_09anim.svg" title="Chuva/aguaceiros"><span class="tempMin">8º</span><span class="tempMax">12º</span><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-2.svg" alt="Vento: Moderado de NW" title="Vento: Moderado de NW"><div class="windDir">NW</div><div class="precProb" alt="Probabilidade precipitação: 100%" title="Probabilidade precipitação: 100%">100% <sup><i class="fa fa-tint" aria-hidden="true"></i></sup></div><div class="wrapper"><div class="warning">&nbsp;</div></div><div class="iuvImg"><div>&nbsp;</div></div></div><div id="8" class="weekly-column"><div class="date">8 Ter</div><img class="weatherImg" src="/opencms/bin/icons/svg/weather/w_ic_d_07anim.svg" title="Chuva/aguaceiros fracos"><span class="tempMin">5º</span><span class="tempMax">12º</span><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: Fraco de NW" title="Vento: Fraco de NW"><div class="windDir">NW</div><div class="precProb" alt="Probabilidade precipitação: 99%" title="Probabilidade precipitação: 99%">99% <sup><i class="fa fa-tint" aria-hidden="true"></i></sup></div><div class="wrapper"><div class="warning">&nbsp;</div></div><div class="iuvImg"><div>&nbsp;</div></div></div><div id="9" class="weekly-column"><div class="date">9 Qua</div><img class="weatherImg" src="/opencms/bin/icons/svg/weather/w_ic_d_10anim.svg" title="Chuva fraca ou chuvisco"><span class="tempMin">4º</span><span class="tempMax">12º</span><img class="windImg d270" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: Fraco de E" title="Vento: Fraco de E"><div class="windDir">E</div><div class="precProb" alt="Probabilidade precipitação: 56%" title="Probabilidade precipitação: 56%">56% <sup><i class="fa fa-tint" aria-hidden="true"></i></sup></div><div class="wrapper"><div class="warning">&nbsp;</div></div><div class="iuvImg"><div>&nbsp;</div></div></div><div id="10" class="weekly-column"><div class="date">10 Qui</div><img class="weatherImg" src="/opencms/bin/icons/svg/weather/w_ic_d_06anim.svg" title="Chuva/aguaceiros"><span class="tempMin">6º</span><span class="tempMax">14º</span><img class="windImg d90" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: Fraco de W" title="Vento: Fraco de W"><div class="windDir">W</div><div class="precProb" alt="Probabilidade precipitação: 77%" title="Probabilidade precipitação: 77%">77% <sup><i class="fa fa-tint" aria-hidden="true"></i></sup></div><div class="wrapper"><div class="warning">&nbsp;</div></div><div class="iuvImg"><div>&nbsp;</div></div></div><div id="11" class="weekly-column"><div class="date">11 Sex</div><img class="weatherImg" src="/opencms/bin/icons/svg/weather/w_ic_d_09anim.svg" title="Chuva/aguaceiros"><span class="tempMin">7º</span><span class="tempMax">14º</span><img class="windImg d90" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: Fraco de W" title="Vento: Fraco de W"><div class="windDir">W</div><div class="precProb" alt="Probabilidade precipitação: 87%" title="Probabilidade precipitação: 87%">87% <sup><i class="fa fa-tint" aria-hidden="true"></i></sup></div><div class="wrapper"><div class="warning">&nbsp;</div></div><div class="iuvImg"><div>&nbsp;</div></div></div><div id="12" class="weekly-column"><div class="date">12 Sáb</div><img class="weatherImg" src="/opencms/bin/icons/svg/weather/w_ic_d_06anim.svg" title="Chuva/aguaceiros"><span class="tempMin">7º</span><span class="tempMax">14º</span><img class="windImg d45" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: Fraco de SW" title="Vento: Fraco de SW"><div class="windDir">SW</div><div class="precProb" alt="Probabilidade precipitação: 88%" title="Probabilidade precipitação: 88%">88% <sup><i class="fa fa-tint" aria-hidden="true"></i></sup></div><div class="wrapper"><div class="warning">&nbsp;</div></div><div class="iuvImg"><div>&nbsp;</div></div></div><div id="13" class="weekly-column"><div class="date">13 Dom</div><img class="weatherImg" src="/opencms/bin/icons/svg/weather/w_ic_d_09anim.svg" title="Chuva/aguaceiros"><span class="tempMin">6º</span><span class="tempMax">13º</span><img class="windImg d0" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: Fraco de S" title="Vento: Fraco de S"><div class="windDir">S</div><div class="precProb" alt="Probabilidade precipitação: 85%" title="Probabilidade precipitação: 85%">85% <sup><i class="fa fa-tint" aria-hidden="true"></i></sup></div><div class="wrapper"><div class="warning">&nbsp;</div></div><div class="iuvImg"><div>&nbsp;</div></div></div></div>
+<div id="daily" style="display: block;">
+	<div class="dayWrapper">
+		<div class="day row headerrow"><div class="daycell-bg" style="width: 270px;">4 Sex</div><div class="daycell-bg second-day" style="width: 540px;">5 Sáb</div></div>
+		<div class="hour row datarow"><div class="wrapper"><div>16H</div></div><div class="wrapper"><div>17H</div></div><div class="wrapper"><div>18H</div></div><div class="wrapper"><div>19H</div></div><div class="wrapper"><div>20H</div></div><div class="wrapper"><div>21H</div></div><div class="wrapper"><div>22H</div></div><div class="wrapper"><div>23H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>0H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>1H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>2H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>3H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>4H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>5H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>6H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>7H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>8H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>9H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>10H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>11H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>12H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>13H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>14H</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>15H</div></div></div>
+		<div class="totalimage row datarow"><div class="wrapper"><img src="/opencms/bin/icons/svg/weather/w_ic_d_07.svg" alt="7" title="Chuva/aguaceiros fracos"></div><div class="wrapper"><img src="/opencms/bin/icons/svg/weather/w_ic_n_07.svg" alt="7" title="Chuva/aguaceiros fracos"></div><div class="wrapper"><img src="/opencms/bin/icons/svg/weather/w_ic_n_07.svg" alt="7" title="Chuva/aguaceiros fracos"></div><div class="wrapper"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper"><img src="/opencms/bin/icons/svg/weather/w_ic_n_04.svg" alt="4" title="Céu muito nublado ou encoberto"></div><div class="wrapper"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_n_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_d_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_d_03.svg" alt="3" title="Céu parcialmente nublado"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_d_06.svg" alt="6" title="Chuva/aguaceiros"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_d_07.svg" alt="7" title="Chuva/aguaceiros fracos"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_d_07.svg" alt="7" title="Chuva/aguaceiros fracos"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_d_07.svg" alt="7" title="Chuva/aguaceiros fracos"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_d_06.svg" alt="6" title="Chuva/aguaceiros"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img src="/opencms/bin/icons/svg/weather/w_ic_d_07.svg" alt="7" title="Chuva/aguaceiros fracos"></div></div>
+		<div class="precipitation row headerrow precdata">Probabilidade de ocorrência de precipitação, igual ou superior a 0.3 mm, nas últimas 3 horas  <i class="fa fa-angle-down"></i></div>
+		<div class="precimage row datarow precdata" style=""><div class="wrapper"><div class="precProb">&nbsp;</div></div><div class="wrapper"><div class="precProb">&nbsp;</div></div><div class="wrapper"><div class="precProb high" alt="Probabilidade precipitação: 38%" title="Probabilidade precipitação: 38%">38%</div></div><div class="wrapper"><div class="precProb">&nbsp;</div></div><div class="wrapper"><div class="precProb">&nbsp;</div></div><div class="wrapper"><div class="precProb low" alt="Probabilidade precipitação: 9%" title="Probabilidade precipitação: 9%">9% </div></div><div class="wrapper"><div class="precProb">&nbsp;</div></div><div class="wrapper"><div class="precProb">&nbsp;</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb low" alt="Probabilidade precipitação: 10%" title="Probabilidade precipitação: 10%">10% </div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb">&nbsp;</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb">&nbsp;</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb low" alt="Probabilidade precipitação: 20%" title="Probabilidade precipitação: 20%">20% </div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb">&nbsp;</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb">&nbsp;</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb high" alt="Probabilidade precipitação: 21%" title="Probabilidade precipitação: 21%">21%</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb">&nbsp;</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb">&nbsp;</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb low" alt="Probabilidade precipitação: 20%" title="Probabilidade precipitação: 20%">20% </div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb">&nbsp;</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb">&nbsp;</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb high" alt="Probabilidade precipitação: 65%" title="Probabilidade precipitação: 65%">65%</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb">&nbsp;</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb">&nbsp;</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="precProb high" alt="Probabilidade precipitação: 84%" title="Probabilidade precipitação: 84%">84%</div></div></div>
+		<div class="utci row headerrow utcidata">Temperatura / Temperatura sentida<i class="fa fa-angle-down"></i></div>
+		<div class="temperature row datarow utcidata"><div class="wrapper"><span class="tempMed">7º</span></div><div class="wrapper"><span class="tempMed">6º</span></div><div class="wrapper"><span class="tempMed">6º</span></div><div class="wrapper"><span class="tempMed">5º</span></div><div class="wrapper"><span class="tempMed">5º</span></div><div class="wrapper"><span class="tempMed">4º</span></div><div class="wrapper"><span class="tempMed">3º</span></div><div class="wrapper"><span class="tempMed">3º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">3º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">3º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">3º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">4º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">3º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">4º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">3º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">3º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">2º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">4º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">6º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">8º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">9º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">10º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">10º</span></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><span class="tempMed">10º</span></div></div>
+		<div class="temperatureutci row datarow utcidata"><div class="wrapper"><div class="utci3">5º</div></div><div class="wrapper"><div class="utci3">5º</div></div><div class="wrapper"><div class="utci3">6º</div></div><div class="wrapper"><div class="utci3">5º</div></div><div class="wrapper"><div class="utci3">5º</div></div><div class="wrapper"><div class="utci2">4º</div></div><div class="wrapper"><div class="utci2">3º</div></div><div class="wrapper"><div class="utci2">3º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci2">3º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci2">3º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci2">3º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci2">4º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci2">3º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci2">4º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci2">3º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci2">3º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci2">3º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci2">4º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci3">6º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci3">8º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci4">8º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci4">9º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci4">9º</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="utci4">8º</div></div></div>
+		<div class="wind row headerrow winddata">Vento (Intensidade: quilómetros por hora. Direcção: classes de rumo, N, NE, E, SE, S, SW, W, NW) <i class="fa fa-angle-down"></i></div>
+		<div class="windimage row datarow winddata" style=""><div class="wrapper"><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 10.2 km/h,  de NW" title="Vento: 10.2 km/h,  de NW"></div><div class="wrapper"><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 6.4 km/h,  de NW" title="Vento: 6.4 km/h,  de NW"></div><div class="wrapper"><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 3.9 km/h,  de NW" title="Vento: 3.9 km/h,  de NW"></div><div class="wrapper"><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 2.5 km/h,  de NW" title="Vento: 2.5 km/h,  de NW"></div><div class="wrapper"><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 2.3 km/h,  de NW" title="Vento: 2.3 km/h,  de NW"></div><div class="wrapper"><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 1.9 km/h,  de NW" title="Vento: 1.9 km/h,  de NW"></div><div class="wrapper"><img class="windImg d45" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 3.2 km/h,  de SW" title="Vento: 3.2 km/h,  de SW"></div><div class="wrapper"><img class="windImg d90" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 4.1 km/h,  de W" title="Vento: 4.1 km/h,  de W"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d45" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 4.2 km/h,  de SW" title="Vento: 4.2 km/h,  de SW"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d45" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 3.8 km/h,  de SW" title="Vento: 3.8 km/h,  de SW"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d45" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 4.5 km/h,  de SW" title="Vento: 4.5 km/h,  de SW"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d45" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 3.3 km/h,  de SW" title="Vento: 3.3 km/h,  de SW"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d45" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 3.3 km/h,  de SW" title="Vento: 3.3 km/h,  de SW"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d90" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 1.8 km/h,  de W" title="Vento: 1.8 km/h,  de W"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d90" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 2.7 km/h,  de W" title="Vento: 2.7 km/h,  de W"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d90" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 1.7 km/h,  de W" title="Vento: 1.7 km/h,  de W"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d0" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 2.0 km/h,  de S" title="Vento: 2.0 km/h,  de S"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d0" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 3.1 km/h,  de S" title="Vento: 3.1 km/h,  de S"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d45" src="/opencms/bin/icons/svg/wind/wind-0.svg" alt="Vento: 0.0 km/h,  de SW" title="Vento: 0.0 km/h,  de SW"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d90" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 1.7 km/h,  de W" title="Vento: 1.7 km/h,  de W"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 5.9 km/h,  de NW" title="Vento: 5.9 km/h,  de NW"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 8.9 km/h,  de NW" title="Vento: 8.9 km/h,  de NW"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 9.1 km/h,  de NW" title="Vento: 9.1 km/h,  de NW"></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><img class="windImg d135" src="/opencms/bin/icons/svg/wind/wind-1.svg" alt="Vento: 10.1 km/h,  de NW" title="Vento: 10.1 km/h,  de NW"></div></div>
+		<div class="windint row datarow winddata" style=""><div class="wrapper"><div>10</div></div><div class="wrapper"><div>6</div></div><div class="wrapper"><div>4</div></div><div class="wrapper"><div>3</div></div><div class="wrapper"><div>2</div></div><div class="wrapper"><div>2</div></div><div class="wrapper"><div>3</div></div><div class="wrapper"><div>4</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>4</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>4</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>5</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>3</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>3</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>2</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>3</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>2</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>2</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>3</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>0</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>2</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>6</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>9</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>9</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>10</div></div></div>
+		<div class="winddir row datarow winddata" style=""><div class="wrapper"><div>NW</div></div><div class="wrapper"><div>NW</div></div><div class="wrapper"><div>NW</div></div><div class="wrapper"><div>NW</div></div><div class="wrapper"><div>NW</div></div><div class="wrapper"><div>NW</div></div><div class="wrapper"><div>SW</div></div><div class="wrapper"><div>W</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>SW</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>SW</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>SW</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>SW</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>SW</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>W</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>W</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>W</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>S</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>S</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>SW</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>W</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>NW</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>NW</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>NW</div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div>NW</div></div></div>
+		<div class="sea row headerrow seadata" style="display: none;">Estado do mar (Mar Total: metros, direcção da onda e temp. da água) <i class="fa fa-angle-down"></i></div>
+		<div class="seatotalimage row datarow seadata" style="display: none;"></div>
+		<div class="seatotal row datarow seadata" style="display: none;"></div>
+		<div class="seadir row datarow seadata" style="display: none;"></div>
+            	<div class="seatemp row datarow seadata" style="display: none;"></div>
+            	<div class="warning row headerrow">Avisos Meteorológicos</div>
+            	<div class="warningdata row datarow"><div class="wrapper"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div><div class="wrapper" style="background-color: rgb(239, 239, 239);"><div class="warning wc-orange"><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG"></a></div></div></div>
+        <p class="warning-msg">Mais informações de Avisos Meteorológicos <strong><a href="https://www.ipma.pt/pt/otempo/prev-sam/timeline.jsp?p=BRG">aqui</a></strong></p></div>
+</div>
+<p>&nbsp;</p>
+<h3 class="bckg_generic bdtop-blues-2px martop10">Qualidade da previsão</h3>
+<p class="padleft5">Consulte a qualidade da previsão meteorológica para a temperatura máxima e mínima do ar elaborada com uma antecedência de 1, 4 e 7 dias.</p>
+<ul class="none">
+    <li><strong><a href="/opencms/pt/otempo/prev.localidade.hora/prev.verificacao/forecast-verification.jsp" target="_self" title="Previsão">Aceder através do link »»</a></strong></li>
+</ul>
+<h3 class="bckg_generic bdtop-blues-2px martop10">Sobre os símbolos utilizados</h3>
+<ul class="none">
+    <li><a href="/opencms/pt/otempo/prev.localidade.hora/legenda.jsp" target="_self" title="Previsão"><strong>Consulte a legenda »»</strong></a></li>
+</ul>
+<p class="marbottom10">&nbsp;</p>
+<p class="text_title"><a id="maisobs" href="javascript:void(0);" style="cursor: pointer">Mais sobre as Previsões</a></p>
+<div id="obss" style="display: none;">
+<p></p><ul>
+    <li>As previsões disponibilizadas são obtidas automaticamente através de processamento estatístico das previsões de dois modelos numéricos (ECMWF e AROME), sendo atualizadas duas vezes por dia. Em situações de diferenças significativas entre a previsão e a realidade, as previsões disponibilizadas para as capitais de distrito e ilhas podem ser corrigidas por meteorologistas.</li>
+    <li>Devido à natureza dos fenómenos meteorológicos, o estado do tempo, em algumas situações, poderá não ser reproduzido adequadamente pelos modelos numéricos. Deste modo, esta previsão poderá ser distinta da previsão descritiva elaborada pelos meteorologistas, pois estes têm ao seu dispor informação adicional e mais atualizada, pelo que o utilizador deverá consultar também essa previsão e eventuais avisos meteorológicos.</li>
+    <li>Para aferir a incerteza da previsão em termos de precipitação, são apresentados dois valores de probabilidade de precipitação:<br>
+    a) na previsão diária é apresentada a probabilidade de precipitação (igual ou superior a 1mm/24h), a qual é um indicador útil para averiguar se poderá ocorrer chuva e/ou neve durante esse dia;<br>
+    b) na previsão horária/tri-horária é apresentada a probabilidade de precipitação (igual ou superior a 0.3 mm) nas últimas três horas. Este valor permite identificar o(s) período(s) do dia em que a ocorrência de chuva e/ou neve é mais provável.  No entanto, em situações meteorológicas de elevada incerteza (e.g. aguaceiros e trovoadas), poderá ocorrer ou não precipitação independentemente dos valores de probabilidade.</li>
+    <li>A temperatura sentida combina os efeitos da sensação de frio induzida pelo vento e da sensação de calor induzida pela humidade relativa do ar. Esta variável é calculada a partir da temperatura e da humidade relativa do ar a 2 m e da intensidade do vento.</li>
+    <li>As previsões são apresentadas em horas UTC. No continente e na Região Autónoma da Madeira a hora legal é igual à UTC, no horário de inverno. No horário de verão, a hora legal é igual a UTC+1.  Assim, nestas regiões, 10h UTC correspondem à hora legal de 10h no inverno e 11h no verão. Na Região Autónoma dos Açores a hora legal é igual a UTC-1 ou a UTC, respetivamente, nos horários de inverno e de verão.</li>
+</ul>
+<p>&nbsp;</p><p></p>
+</div>
+<script type="text/javascript">
+    $("#obss").hide();
+	$("#maisobs").click(function() {
+        $("#obss").slideToggle( "slow");
+    });
+</script>
+<script src="/opencms/bin/scripts/otempo/prev.localidade.hora.js" type="text/javascript"></script>
+<script src="/opencms/bin/scripts/otempo/prev.localidade.hora-helper.js" type="text/javascript"></script>
+
+
+
+
+        		</div>
+        		<!-- END CENTRAL & RIGHT CONTENT  -->
+        		
+          	<div id="BotsCont">
+            		<ul>
+              			<li><a id="idPrint" href="?print=true" target="_blank"><i class="fa fa-lg fa-print"></i> Imprimir</a></li>
+              			<li class="">&nbsp;|&nbsp;</li>
+              			<li><a href="#contenttop"><i class="fa fa-lg fa-chevron-circle-up"></i> Topo</a></li>
+<!--
+              			<li class="">&nbsp;|&nbsp;</li>
+              			<li><a href="#"><i class="fa fa-lg fa-bookmark-o"></i> Fechar</a></li>
+-->
+            		</ul>
+          	</div>
+    
+        		<div class="brclearall">&nbsp;</div>
+      		<!--</div>-->
+	</div>      	
+	<!-- END MAIN CONTENT  -->        
+      	<!-- START FOOTER CONTENT  -->        
+	
+
+
+	
+
+
+
+
+<div class="brclearall">&nbsp;</div>
+  <div id="FooterMenu">       
+    <div class="nav_footer">
+      <ul class="nav_map">
+
+<li><h2>Media</h2><ul class="nav"><li class="news"><a href="/opencms/pt/media/noticias/index.jsp" target="_self">Notícias</a></li><li class="comunication"><a href="/opencms/pt/geofisica/comunicados/" target="_self">Comunicados</a></li><li class="seminar"><a href="/opencms/pt/media/divulgacao/" target="_self">Palestras / formações</a></li><li class="press"><a href="/opencms/pt/media/comunicados.imprensa/" target="_self">Comunicados Imprensa</a></li></ul></li><li><h2>Redes Sociais</h2><ul class="nav"><li class="facebook"><a href="https://www.facebook.com/ipma.pt" target="_blank">Facebook</a></li><li class="facebook"><a href="https://www.facebook.com/dra.ipma.pt/" target="_blank">Facebook - Açores</a></li><li class="twitter"><a href="https://twitter.com/ipma_pt" target="_blank">Twitter</a></li><li class="youtube"><a href="https://www.youtube.com/ipmaPT" target="_blank">YouTube</a></li><li class="instagram"><a href="https://www.instagram.com/ipma.pt/" target="_blank">Instagram</a></li></ul></li><li><h2>Serviços</h2><ul class="nav"><li class="rss"><a href="/opencms/pt/produtoseservicos/index.jsp?page=rss.xml" target="_self">RSS</a></li><li class="apps_android"><a href="https://play.google.com/store/apps/details?id=pt.ipma.meteo&amp;hl=pt_PT" target="_blank">Apps Android</a></li><li class="apps_apple"><a href="https://itunes.apple.com/pt/app/meteo-ipma/id889918105?ls=1&amp;mt=8" target="_blank">Apps Apple</a></li><li class="pda"><a href="http://pda.ipma.pt" target="_blank">PDA</a></li><li class="services"><a href="/opencms/pt/produtoseservicos/index.jsp" target="_self">Produtos e serviços</a></li></ul></li><li><h2>Informações</h2><ul class="nav"><li class="contacts"><a href="/opencms/pt/siteinfo/contacto.jsp" target="_self">Contactos</a></li><li class="links"><a href="/opencms/pt/siteinfo/index.html?page=links.xml" target="_self">Links úteis</a></li><li class="scholarship"><a href="/opencms/pt/recrutamento/bolsas/index.jsp" target="_self">Bolsas de investigação</a></li><li class="eeagrants"><a href="/opencms/pt/investigacao/eeagrants/index.jsp" target="_self">Projetos EEA Grants</a></li><li class="links"><a href="https://www.ecmwf.int/" target="_blank">ECMWF</a></li></ul></li><li><h2>Sobre o Site</h2><ul class="nav"><li class="acess"><a href="/opencms/pt/siteinfo/index.html?page=acessibilidade.xml" target="_self">Acessibilidades</a></li><li class="legal"><a href="/opencms/pt/siteinfo/index.html?page=index.xml" target="_self">Avisos legais</a></li><li class="sitemap"><a href="/opencms/pt/siteinfo/sitemap.jsp" target="_self">Mapa do site</a></li></ul></li><li><h2>Projectos WEB</h2><ul class="nav"><li class="metglobal"><a href="https://observar.ipma.pt" target="_blank">Observar</a></li><li class="subs"><a href="http://subscricoes.ipma.pt" target="_blank">Subscrições</a></li><li class="quest"><a href="https://survey.ipma.pt" target="_blank">Inquéritos</a></li><li class="moodle"><a href="http://elearning.ipma.pt" target="_blank">E-learning</a></li><li class="shakemap"><a href="http://shakemap.ipma.pt" target="_blank">Shakemap</a></li></ul></li>
+			</ul>
+		</div>
+	</div>
+
+
+
+	
+
+
+    <div class="brclearall">&nbsp;</div>
+    <div class="nav_credits">
+      <ul class="">
+        <li class="cert"><a href="http://www.apcer.pt/" target="_blank"><img src="/export/system/modules/ipma.website/resources/images/logo_apcer.png" alt="Apcer - A marca da Certificação"></a></li>
+        <li class="credits"> 
+Lisboa: <div class="clock" id="localClock">16h56m</div> &nbsp; &nbsp; 
+UTC: <div class="clock" id="utcClock">16h56m</div>
+
+<br>Copyright © <strong>Instituto Português do Mar e da Atmosfera&nbsp;</strong>2020<br><em></em><br>
+<a href="https://eportugal.gov.pt/" target="_blank"><img src="/export/sites/ipma/bin/images.destaques/estamos-on-banner-468x60.jpg" alt="Estamos ON" pukk9hofe=""></a></li>
+        <li class="ministerio"><a href="https://www.portugal.gov.pt/pt/gc21/area-de-governo/mar" target="_blank"><img src="/export/sites/ipma/bin/icons/logos/logo-mm.png" alt="Ministério do Mar"></a></li>
+
+      </ul>
+    </div>
+
+
+<script type="text/javascript">
+<!--
+var nhourslocal = parseInt('16',10);
+var nminslocal = parseInt('47',10);
+var nsecslocal = parseInt('48',10);
+
+var nhoursutc = parseInt('16',10);
+var nminsutc = parseInt('47',10);
+var nsecsutc = parseInt('48',10);
+
+function startLocalClock(){
+	if(++nsecslocal > 59){
+		nsecslocal = 0;
+		if(++nminslocal > 59 ){
+			nminslocal = 0;
+			if (++nhourslocal > 23){
+				nhourslocal = 0;
+				nminslocal = 0;
+				nsecslocal = 0;
+			}
+		}
+	}
+
+	var strSecs = nsecslocal < 10 ? "0" + nsecslocal : nsecslocal;
+	var strMins = nminslocal < 10 ? "0" + nminslocal : nminslocal;
+	var strHours = nhourslocal < 10 ? "0" + nhourslocal : nhourslocal;
+
+	document.getElementById("localClock").innerHTML=strHours+"h"+strMins+"m";
+	setTimeout('startLocalClock()',1000);
+}
+
+function startUtcClock(){
+	if(++nsecsutc > 59){
+		nsecsutc = 0;
+		if(++nminsutc > 59 ){
+			nminsutc = 0;
+			if (++nhoursutc > 23){
+				nhoursutc = 0;
+				nminsutc = 0;
+				nsecsutc = 0;
+			}
+		}
+	}
+
+	var strSecs = nsecsutc < 10 ? "0" + nsecsutc : nsecsutc;
+	var strMins = nminsutc < 10 ? "0" + nminsutc : nminsutc;
+	var strHours = nhoursutc < 10 ? "" + nhoursutc : nhoursutc;
+
+	document.getElementById("utcClock").innerHTML=strHours+"h"+strMins+"m";
+	setTimeout('startUtcClock()',1000);
+}
+
+ startLocalClock();
+ startUtcClock();
+//-->
+</script>
+<noscript>time</noscript>
+<!--<script type="text/javascript">
+	tabdropdown.initializetabmenu("dropmenu")
+</script>
+<noscript>Inicializar menu</noscript>-->
+
+
+
+<script type="text/javascript">
+<!--//
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-32378874-1']);
+  _gaq.push(['_setDomainName', 'ipma.pt']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+//-->
+</script>
+
+
+
+
+
+<!-- END MAIN CONTENT  -->
+</div>
+</div>
+
+
+</div><div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div></div></body>

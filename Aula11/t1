@@ -1,0 +1,5 @@
+v = ('Escolas', [[('PT', 'Escola de Direito'), ('EN', 'Law School')], [('PT', 'Escola de Engenharia'), ('EN', 'School of Engineering')]])
+
+lista = [ x + [("dom",v[0])] for x in v[1] ]
+
+print( lista)
